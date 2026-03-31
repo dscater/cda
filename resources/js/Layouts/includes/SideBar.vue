@@ -63,7 +63,7 @@ const salir = () => {
                 .post(route("logout"))
                 .then((response) => {})
                 .finally(() => {
-                    window.location.href = "/";
+                    window.location.href = "/login";
                 });
         }
     });
@@ -124,7 +124,7 @@ onUnmounted(() => {});
                         v-if="
                             permisos == '*' ||
                             permisos.includes('usuarios.index') ||
-                            permisos.includes('ventas.index') ||
+                            permisos.includes('catalogos.index') ||
                             permisos.includes('productos.index')
                         "
                     >
@@ -142,6 +142,15 @@ onUnmounted(() => {});
                     <ItemMenu
                         v-if="
                             permisos == '*' ||
+                            permisos.includes('catalogos.index')
+                        "
+                        :label="'Menú de Catálogo'"
+                        :ruta="'catalogos.index'"
+                        :icon="'fa fa-clipboard'"
+                    ></ItemMenu>
+                    <ItemMenu
+                        v-if="
+                            permisos == '*' ||
                             permisos.includes('usuarios.index')
                         "
                         :label="'Usuarios'"
@@ -154,17 +163,11 @@ onUnmounted(() => {});
                     <ItemMenu
                         v-if="
                             permisos == '*' ||
-                            permisos.includes('ventas.historial')
+                            permisos.includes('socials.index')
                         "
-                        :label="'Historial de Ventas'"
-                        :ruta="'ventas.historial'"
+                        :label="'Redes Sociales'"
+                        :ruta="'socials.index'"
                         :icon="'fa fa-table'"
-                    ></ItemMenu>
-                    <ItemMenu
-                        v-if="permisos == '*' || permisos.includes('qrs.index')"
-                        :label="'Qr de Pago'"
-                        :ruta="'qrs.index'"
-                        :icon="'fa fa-qrcode'"
                     ></ItemMenu>
                     <ItemMenu
                         v-if="

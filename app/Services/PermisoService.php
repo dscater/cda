@@ -21,6 +21,16 @@ class PermisoService
             "usuarios.destroy",
             "usuarios.password",
 
+            "catalogos.paginado",
+            "catalogos.index",
+            "catalogos.listado",
+            "catalogos.create",
+            "catalogos.store",
+            "catalogos.edit",
+            "catalogos.show",
+            "catalogos.update",
+            "catalogos.destroy",
+
             "productos.paginado",
             "productos.index",
             "productos.listado",
@@ -30,8 +40,6 @@ class PermisoService
             "productos.show",
             "productos.update",
             "productos.destroy",
-            "productos.barras",
-            "productos.byCodigo",
 
             "ventas.paginado",
             "ventas.index",
@@ -42,9 +50,12 @@ class PermisoService
             "ventas.show",
             "ventas.update",
             "ventas.destroy",
-            "ventas.historial",
-            "ventas.paginadoHistorial",
-            "ventas.exportarPDF",
+
+            "socials.index",
+            "socials.create",
+            "socials.edit",
+            "socials.update",
+            "socials.destroy",
 
             "configuracions.index",
             "configuracions.create",

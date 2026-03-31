@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Social extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "whatsapp",
+        "facebook",
+        "tiktok",
+        "instagram",
+        "youtube",
+        "x",
+        "web",
+        "correo",
+    ];
 }

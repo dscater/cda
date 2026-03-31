@@ -27,7 +27,7 @@ const logout = () => {
         .post(route("logout"))
         .then((response) => {})
         .finally(() => {
-            window.location.href = "/";
+            window.location.href = "/login";
         });
 };
 

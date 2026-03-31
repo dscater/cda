@@ -29,33 +29,6 @@ const enviarFormulario = () => {
         .then((response) => {
             form.usuario = "";
             form.password = "";
-            if (response.data.codigo == true) {
-                Swal.fire({
-                    icon: "info",
-                    title: "Atención",
-                    html: `Te enviamos un código de verificación a tu correo para que puedas iniciar sesión`,
-                    confirmButtonText: `Aceptar`,
-                    customClass: {
-                        confirmButton: "btn-alert-primary",
-                    },
-                });
-                // ABRIR MODAL CÓDIGO
-                oUserVerificado.value = response.data.user;
-                muestraFormCodigo.value = true;
-                emits("cerrar-formulario");
-            } else {
-                // ENVIAR AL INICIO
-                Swal.fire({
-                    icon: "success",
-                    title: "Correcto",
-                    html: `<strong>Sesión iniciada correctamente</strong>`,
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                setTimeout(() => {
-                    window.location.href = route("inicio");
-                });
-            }
         })
         .catch((error) => {
             if (error.response?.status === 422) {

@@ -24,6 +24,7 @@ watch(
     (newValue) => {
         muestra_form.value = newValue;
         if (muestra_form.value) {
+            foto.value.value = null;
             document
                 .getElementsByTagName("body")[0]
                 .classList.add("modal-open");
@@ -202,26 +203,83 @@ onMounted(() => {
                     <span class="text-danger">(*)</span> son obligatorios.
                 </p>
                 <div class="row">
-                    <div class="col-md-6 mt-2">
-                        <label class="required">Usuario</label>
+                    <div class="col-md-4 mt-2">
+                        <label class="required">Nombre(s)</label>
                         <input
                             type="text"
                             class="form-control"
                             :class="{
-                                'parsley-error': form.errors?.usuario,
+                                'parsley-error': form.errors?.nombre,
                             }"
-                            v-model="form.usuario"
+                            v-model="form.nombre"
                         />
                         <ul
-                            v-if="form.errors?.usuario"
+                            v-if="form.errors?.nombre"
                             class="list-unstyled text-danger"
                         >
                             <li class="parsley-required">
-                                {{ form.errors?.usuario }}
+                                {{ form.errors?.nombre }}
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-6 mt-2">
+                    <div class="col-md-4 mt-2">
+                        <label class="required">Apellido Paterno</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            :class="{
+                                'parsley-error': form.errors?.paterno,
+                            }"
+                            v-model="form.paterno"
+                        />
+                        <ul
+                            v-if="form.errors?.paterno"
+                            class="list-unstyled text-danger"
+                        >
+                            <li class="parsley-required">
+                                {{ form.errors?.paterno }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <label class="">Apellido Materno</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            :class="{
+                                'parsley-error': form.errors?.materno,
+                            }"
+                            v-model="form.materno"
+                        />
+                        <ul
+                            v-if="form.errors?.materno"
+                            class="list-unstyled text-danger"
+                        >
+                            <li class="parsley-required">
+                                {{ form.errors?.materno }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <label class="required">Correo Electrónico</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            :class="{
+                                'parsley-error': form.errors?.correo,
+                            }"
+                            v-model="form.correo"
+                        />
+                        <ul
+                            v-if="form.errors?.correo"
+                            class="list-unstyled text-danger"
+                        >
+                            <li class="parsley-required">
+                                {{ form.errors?.correo }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 mt-2">
                         <label :class="[form.id == 0 ? 'required' : '']"
                             >Contraseña</label
                         >
@@ -243,7 +301,26 @@ onMounted(() => {
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-6 mt-2">
+                    <div class="col-md-4 mt-2">
+                        <label class="required">Celular</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            :class="{
+                                'parsley-error': form.errors?.fono,
+                            }"
+                            v-model="form.fono"
+                        />
+                        <ul
+                            v-if="form.errors?.fono"
+                            class="list-unstyled text-danger"
+                        >
+                            <li class="parsley-required">
+                                {{ form.errors?.fono }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 mt-2">
                         <label class="required">Seleccionar Tipo</label>
                         <select
                             class="form-control"
@@ -254,7 +331,7 @@ onMounted(() => {
                         >
                             <option value="">- Seleccione -</option>
                             <option value="ADMINISTRADOR">ADMINISTRADOR</option>
-                            <option value="VENDEDOR">VENDEDOR</option>
+                            <option value="OPERADOR">OPERADOR</option>
                         </select>
 
                         <ul
@@ -265,6 +342,42 @@ onMounted(() => {
                                 {{ form.errors?.tipo }}
                             </li>
                         </ul>
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <label class="">Foto</label>
+                        <input
+                            type="file"
+                            class="form-control"
+                            :class="{
+                                'parsley-error': form.errors?.foto,
+                            }"
+                            @change="cargaArchivo($event, 'foto')"
+                            ref="foto"
+                        />
+                        <ul
+                            v-if="form.errors?.foto"
+                            class="list-unstyled text-danger"
+                        >
+                            <li class="parsley-required">
+                                {{ form.errors?.foto }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <label class="required">Acceso</label>
+                        <br />
+                        <el-switch
+                            size="large"
+                            active-text="HABILITADO"
+                            inactive-text="DESHABILITADO"
+                            v-model="form.acceso"
+                            :active-value="1"
+                            :inactive-value="0"
+                            style="
+                                --el-switch-on-color: #13ce66;
+                                --el-switch-off-color: #ff4949;
+                            "
+                        />
                     </div>
                 </div>
             </form>

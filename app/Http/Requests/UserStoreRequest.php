@@ -22,9 +22,15 @@ class UserStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "usuario" => "required|min:2",
+            "nombre" => "required|min:2",
+            "paterno" => "required|min:2",
+            "materno" => "nullable",
+            "correo" => "required|email|unique:users,correo",
+            "fono" => "required|min:2",
+            "acceso" => "required",
             "password" => "required|min:6",
             "tipo" => "required",
+            "foto" => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
         ];
     }
 
@@ -36,10 +42,15 @@ class UserStoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            "usuario.required" => "Este campo es obligatorio",
-            "usuario.min" => "Debes ingresar al menos :min caracteres",
+            "nombre.required" => "Este campo es obligatorio",
+            "nombre.min" => "Debes ingresar al menos :min caracteres",
+            "paterno.required" => "Este campo es obligatorio",
+            "paterno.min" => "Debes ingresar al menos :min caracteres",
+            "fono.required" => "Este campo es obligatorio",
+            "fono.min" => "Debes ingresar al menos :min caracteres",
             "password.required" => "Este campo es obligatorio",
             "password.min" => "Debes ingresar al menos :min caracteres",
+            "acceso.required" => "Este campo es obligatorio",
             "tipo.required" => "Este campo es obligatorio",
         ];
     }

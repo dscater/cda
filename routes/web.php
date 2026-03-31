@@ -1,30 +1,23 @@
 <?php
 
+use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\PortalController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReporteController;
+use App\Http\Controllers\SocialController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect()->route('inicio');
-    }
-    return Inertia::render('Auth/Login');
-});
-
-Route::get('/login', function () {
-    if (Auth::check()) {
-        return redirect()->route('inicio');
-    }
-    return Inertia::render('Auth/Login');
-})->name("login");
+Route::get('/', [PortalController::class, 'index'])->name('portal');
 
 Route::get("configuracions/getConfiguracion", [ConfiguracionController::class, 'getConfiguracion'])->name("configuracions.getConfiguracion");
+Route::get("socials/getSocial", [SocialController::class, 'getSocial'])->name("socials.getSocial");
 
 Route::get('/clear-cache', function () {
     Artisan::call('config:cache');
@@ -63,13 +56,23 @@ Route::middleware(['auth', 'permisoUsuario'])->prefix("admin")->group(function (
         ["index", "store"]
     );
 
+    // CATALOGOS
+    Route::get("catalogos/paginado", [CatalogoController::class, 'paginado'])->name("catalogos.paginado");
+    Route::get("catalogos/listado", [CatalogoController::class, 'listado'])->name("catalogos.listado");
+    Route::resource("catalogos", CatalogoController::class)->only(
+        ["index", "store", "edit", "show", "update", "destroy"]
+    );
+
     // PRODUCTOS
-    Route::get("productos/barras", [ProductoController::class, 'barras'])->name("productos.barras");
     Route::get("productos/paginado", [ProductoController::class, 'paginado'])->name("productos.paginado");
     Route::get("productos/listado", [ProductoController::class, 'listado'])->name("productos.listado");
-    Route::get("productos/getProducto/byCodigo", [ProductoController::class, 'byCodigo'])->name("productos.byCodigo");
     Route::resource("productos", ProductoController::class)->only(
         ["index", "store", "edit", "show", "update", "destroy"]
+    );
+
+    // REDES SOCIALES
+    Route::resource("socials", SocialController::class)->only(
+        ["index", "show", "update"]
     );
 
     // REPORTES

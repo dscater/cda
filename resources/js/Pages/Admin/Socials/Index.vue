@@ -7,16 +7,16 @@ import Content from "@/Components/Content.vue";
 import { onMounted, ref, computed, onBeforeMount } from "vue";
 import { usePage, Head, useForm, Link } from "@inertiajs/vue3";
 import { useAppStore } from "@/stores/aplicacion/appStore";
-import { useConfiguracionStore } from "@/stores/configuracion/configuracionStore";
+import { useSocialStore } from "@/stores/social/socialStore";
 const appStore = useAppStore();
-const configuracionStore = useConfiguracionStore();
+const socialStore = useSocialStore();
 
 onBeforeMount(() => {
     appStore.startLoading();
 });
 
 const props_page = defineProps({
-    configuracion: {
+    social: {
         type: Object,
         default: null,
     },
@@ -25,23 +25,27 @@ const { props } = usePage();
 const enviando = ref(false);
 
 let form = null;
-if (props_page.configuracion != null) {
-    props_page.configuracion["_method"] = "put";
-    form = useForm(props_page.configuracion);
+if (props_page.social != null) {
+    props_page.social["_method"] = "put";
+    form = useForm(props_page.social);
 } else {
     form = useForm({
         _method: "put",
         id: 0,
-        nombre_sistema: "",
-        alias: "",
-        url_logo: "",
-        logo: "",
+        whatsapp: "",
+        facebook: "",
+        tiktok: "",
+        instagram: "",
+        youtube: "",
+        x: "",
+        web: "",
+        correo: "",
     });
 }
 
 const enviarFormulario = () => {
     enviando.value = true;
-    form.post(route("configuracions.update", form.id), {
+    form.post(route("socials.update", form.id), {
         onSuccess: (response) => {
             // Mostrar mensaje de éxito
             console.log("correcto");
@@ -77,7 +81,7 @@ const enviarFormulario = () => {
         },
         onFinish: () => {
             enviando.value = false;
-            configuracionStore.initConfiguracion();
+            socialStore.initSocial();
         },
     });
 };
@@ -107,12 +111,12 @@ onMounted(() => {
 });
 </script>
 <template>
-    <Head title="Configuración"></Head>
+    <Head title="Redes Sociales"></Head>
     <Content>
         <template #header>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Configuración</h1>
+                    <h1 class="m-0">Redes Sociales</h1>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
@@ -120,7 +124,7 @@ onMounted(() => {
                         <li class="breadcrumb-item">
                             <Link :href="route('inicio')">Inicio</Link>
                         </li>
-                        <li class="breadcrumb-item active">Configuración</li>
+                        <li class="breadcrumb-item active">Redes Sociales</li>
                     </ol>
                 </div>
                 <!-- /.col -->
@@ -130,47 +134,87 @@ onMounted(() => {
         <form @submit.prevent="enviarFormulario()">
             <div class="row">
                 <div class="col-md-4 form-group mb-3">
-                    <label class="required">Nombre del sistema</label>
+                    <label>Whatsapp</label>
                     <input
                         type="text"
                         class="form-control"
-                        v-model="form.nombre_sistema"
+                        v-model="form.whatsapp"
                     />
-                    <span
-                        class="text-danger"
-                        v-if="form.errors?.nombre_sistema"
-                        >{{ form.errors.nombre_sistema }}</span
-                    >
-                </div>
-                <div class="col-md-4 form-group mb-3">
-                    <label class="required">Alias</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        v-model="form.alias"
-                    />
-                    <span class="text-danger" v-if="form.errors?.alias">{{
-                        form.errors.alias
+                    <span class="text-danger" v-if="form.errors?.whatsapp">{{
+                        form.errors.whatsapp
                     }}</span>
                 </div>
                 <div class="col-md-4 form-group mb-3">
-                    <label class="required">Logo</label>
+                    <label>Facebook</label>
                     <input
-                        type="file"
+                        type="text"
                         class="form-control"
-                        @change="cargaArchivo($event, 'logo')"
-                        ref="logo"
+                        v-model="form.facebook"
                     />
-                    <div class="logo_muestra w-100 text-center">
-                        <img
-                            :src="form.url_logo"
-                            alt=""
-                            v-if="form.url_logo"
-                            width="50%"
-                        />
-                    </div>
-                    <span class="text-danger" v-if="form.errors?.logo">{{
-                        form.errors.logo
+                    <span class="text-danger" v-if="form.errors?.facebook">{{
+                        form.errors.facebook
+                    }}</span>
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label>Tiktok</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.tiktok"
+                    />
+                    <span class="text-danger" v-if="form.errors?.tiktok">{{
+                        form.errors.tiktok
+                    }}</span>
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label>Instagram</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.instagram"
+                    />
+                    <span class="text-danger" v-if="form.errors?.instagram">{{
+                        form.errors.instagram
+                    }}</span>
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label>Youtube</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.youtube"
+                    />
+                    <span class="text-danger" v-if="form.errors?.youtube">{{
+                        form.errors.youtube
+                    }}</span>
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label>X</label>
+                    <input type="text" class="form-control" v-model="form.x" />
+                    <span class="text-danger" v-if="form.errors?.x">{{
+                        form.errors.x
+                    }}</span>
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label>Web</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.web"
+                    />
+                    <span class="text-danger" v-if="form.errors?.web">{{
+                        form.errors.web
+                    }}</span>
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label>Correo electrónico</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.correo"
+                    />
+                    <span class="text-danger" v-if="form.errors?.correo">{{
+                        form.errors.correo
                     }}</span>
                 </div>
             </div>
@@ -179,7 +223,7 @@ onMounted(() => {
                     class="col-12"
                     v-if="
                         props.auth.user.permisos == '*' ||
-                        props.auth.user.permisos.includes('configuracions.edit')
+                        props.auth.user.permisos.includes('socials.edit')
                     "
                 >
                     <button

@@ -9,4 +9,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Catalogo extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        "nombre",
+        "imagen",
+    ];
+
+    protected $appends = ["url_imagen"];
+
+    public function getUrlImagenAttribute()
+    {
+        return asset("imgs/catalogos/{$this->imagen}");
+    }
 }

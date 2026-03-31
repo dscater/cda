@@ -23,7 +23,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): Response|RedirectResponse
     {
-        return redirect()->route("login");
+        if (Auth::check()) {
+            return redirect()->route('inicio');
+        }
+
         return Inertia::render('Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
@@ -60,6 +63,6 @@ class AuthenticatedSessionController extends Controller
         if ($request->ajax()) {
             return response()->JSON(true);
         }
-        return redirect()->route('login');
+        return redirect()->intended(route('login'));
     }
 }

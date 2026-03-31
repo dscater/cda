@@ -10,35 +10,24 @@ class Producto extends Model
     use HasFactory;
 
     protected $fillable = [
-        "codigo",
+        "catalogo_id",
         "nombre",
-        "foto",
-        "marca",
-        "modelo",
-        "precio",
-        "talla",
-        "fecha_registro",
-        "hora_registro",
-        "status",
+        "imagen",
+        "estado",
     ];
 
-    protected $appends = ["fecha_registro_t", "fecha_hora", "url_foto"];
+    protected $appends = ["url_imagen"];
 
-    public function getUrlFotoAttribute()
+    public function getUrlImagenAttribute()
     {
-        if ($this->foto) {
-            return asset("imgs/productos/" . $this->foto);
+        if ($this->imagen) {
+            return asset("imgs/productos/" . $this->imagen);
         }
         return null;
     }
 
-    public function getFechaRegistroTAttribute()
+    public function catalogo()
     {
-        return date("d/m/Y", strtotime($this->fecha_registro));
-    }
-
-    public function getFechaHoraAttribute()
-    {
-        return date("d/m/Y H:i:s", strtotime($this->fecha_registro . " " . $this->hora_registro));
+        return $this->belongsTo(Catalogo::class, 'catalogo_id');
     }
 }

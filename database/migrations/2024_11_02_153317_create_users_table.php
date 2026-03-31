@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("nombre", 255);
             $table->string("paterno", 255);
             $table->string("materno", 255)->nullable();
+            $table->string("correo")->nullable();
             $table->string("fono", 255);
             $table->string('password');
             $table->integer("acceso");

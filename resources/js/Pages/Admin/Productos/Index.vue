@@ -32,8 +32,8 @@ const headers = [
         width: "4%",
     },
     {
-        label: "CÓDIGO",
-        key: "codigo",
+        label: "MENÚ CATÁLOGO",
+        key: "catalogo.nombre",
         sortable: true,
     },
     {
@@ -42,33 +42,13 @@ const headers = [
         sortable: true,
     },
     {
-        label: "MARCA",
-        key: "marca",
+        label: "IMAGEN",
+        key: "imagen",
         sortable: true,
     },
     {
-        label: "MODELO",
-        key: "modelo",
-        sortable: true,
-    },
-    {
-        label: "PRECIO",
-        key: "precio",
-        sortable: true,
-    },
-    {
-        label: "TALLA",
-        key: "talla",
-        sortable: true,
-    },
-    {
-        label: "FOTO",
-        key: "foto",
-        sortable: true,
-    },
-    {
-        label: "FECHA REGISTRO",
-        key: "fecha_registro",
+        label: "ESTADO",
+        key: "estado",
         sortable: true,
     },
     {
@@ -168,19 +148,6 @@ const eliminarProducto = (item) => {
                         >
                             <i class="fa fa-plus"></i> Nuevo Producto
                         </button>
-                        <button
-                            v-if="
-                                props_page.auth?.user.permisos == '*' ||
-                                props_page.auth?.user.permisos.includes(
-                                    'productos.barras',
-                                )
-                            "
-                            class="btn bg1 ml-1"
-                            @click="imprimirBarras('todos')"
-                        >
-                            <i class="fa fa-barcode"></i> Imprimir Todos los
-                            Códigos de Barra
-                        </button>
                     </div>
                     <div class="col-md-8 my-1">
                         <div class="row justify-content-end">
@@ -240,8 +207,8 @@ const eliminarProducto = (item) => {
                                         ></i></button
                                 ></el-tooltip>
                             </template>
-                            <template #foto="{ item }">
-                                <img :src="item.url_foto" width="90px" />
+                            <template #imagen="{ item }">
+                                <img :src="item.url_imagen" width="90px" />
                             </template>
                             <template #accion="{ item }">
                                 <template

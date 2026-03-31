@@ -1,7 +1,7 @@
 <script setup>
 import MiModal from "@/Components/MiModal.vue";
 import { useForm, usePage } from "@inertiajs/vue3";
-import { useProductos } from "@/composables/productos/useProductos";
+import { useCatalogos } from "@/composables/catalogos/useCatalogos";
 import { watch, ref, computed, defineEmits, onMounted, nextTick } from "vue";
 const props = defineProps({
     muestra_formulario: {
@@ -14,22 +14,21 @@ const props = defineProps({
     },
 });
 
-const { oProducto, limpiarProducto } = useProductos();
+const { oCatalogo, limpiarCatalogo } = useCatalogos();
 const accion_form = ref(props.accion_formulario);
 const muestra_form = ref(props.muestra_formulario);
 const enviando = ref(false);
-let form = useForm(oProducto.value);
+let form = useForm(oCatalogo.value);
 watch(
     () => props.muestra_formulario,
     (newValue) => {
         muestra_form.value = newValue;
         if (muestra_form.value) {
-            cargarCatalogos();
             archivo.value.value = null;
             document
                 .getElementsByTagName("body")[0]
                 .classList.add("modal-open");
-            form = useForm(oProducto.value);
+            form = useForm(oCatalogo.value);
         } else {
             document
                 .getElementsByTagName("body")[0]
@@ -49,17 +48,15 @@ watch(
 
 const { flash } = usePage().props;
 
-const listCatalogos = ref([]);
-const cargarCatalogos = () => {
-    axios.get(route("catalogos.listado")).then((response) => {
-        listCatalogos.value = response.data.catalogos;
-    });
-};
+function cargaArchivo(e, key) {
+    form[key] = null;
+    form[key] = e.target.files[0];
+}
 
 const tituloDialog = computed(() => {
     return accion_form.value == 0
-        ? `<i class="fa fa-plus"></i> Nuevo Producto`
-        : `<i class="fa fa-edit"></i> Editar Producto`;
+        ? `<i class="fa fa-plus"></i> Nuevo Menú de Catálogo`
+        : `<i class="fa fa-edit"></i> Editar Menú de Catálogo`;
 });
 
 const textBtn = computed(() => {
@@ -76,8 +73,8 @@ const enviarFormulario = () => {
     enviando.value = true;
     let url =
         accion_form.value == 0
-            ? route("productos.store")
-            : route("productos.update", form.id);
+            ? route("catalogos.store")
+            : route("catalogos.update", form.id);
 
     form.post(url, {
         preserveScroll: true,
@@ -96,7 +93,7 @@ const enviarFormulario = () => {
                 },
             });
             form.reset();
-            limpiarProducto();
+            limpiarCatalogo();
             emits("envio-formulario");
         },
         onError: (err, code) => {
@@ -186,34 +183,8 @@ onMounted(() => {});
                     <span class="text-danger">(*)</span> son obligatorios.
                 </p>
                 <div class="row">
-                    <div class="col-md-4 mt-2">
-                        <label class="required">Seleccionar Menú</label>
-                        <el-select
-                            :class="{
-                                'parsley-error': form.errors?.catalogo_id,
-                            }"
-                            placeholder="Seleccionar Menú"
-                            v-model="form.catalogo_id"
-                            filterable
-                        >
-                            <el-option
-                                v-for="item in listCatalogos"
-                                :key="item.id"
-                                :label="item.nombre"
-                                :value="item.id"
-                            ></el-option>
-                        </el-select>
-                        <ul
-                            v-if="form.errors?.catalogo_id"
-                            class="d-block text-danger list-unstyled"
-                        >
-                            <li class="parsley-required">
-                                {{ form.errors?.catalogo_id }}
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4 mt-2">
-                        <label class="required">Nombre de Producto</label>
+                    <div class="col-md-7 mt-2">
+                        <label class="required">Nombre Menú</label>
                         <el-input
                             type="text"
                             :class="{
@@ -231,8 +202,8 @@ onMounted(() => {});
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-4 mt-2">
-                        <label class="required">Imagen Referencial</label>
+                    <div class="col-md-5 mt-2">
+                        <label class="required">Foto</label>
                         <input
                             type="file"
                             class="form-control"
@@ -250,22 +221,6 @@ onMounted(() => {});
                                 {{ form.errors?.imagen }}
                             </li>
                         </ul>
-                    </div>
-                    <div class="col-md-4 mt-2">
-                        <label class="required">Acceso</label>
-                        <br />
-                        <el-switch
-                            size="large"
-                            active-text="PÚBLICO"
-                            inactive-text="DESHABILITADO"
-                            v-model="form.estado"
-                            :active-value="'PÚBLICO'"
-                            :inactive-value="'DESHABILITADO'"
-                            style="
-                                --el-switch-on-color: #13ce66;
-                                --el-switch-off-color: #ff4949;
-                            "
-                        />
                     </div>
                 </div>
             </form>

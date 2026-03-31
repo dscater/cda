@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Log;
 
 class UserService
 {
-    public function __construct(private  CargarArchivoService $cargarArchivoService) {}
+    private $modulo = "USUARIOS";
+
+    public function __construct(private  CargarArchivoService $cargarArchivoService, private HistorialAccionService $historialAccionService) {}
 
 
     /**
@@ -50,59 +52,6 @@ class UserService
             $users->where(function ($query) use ($search, $columnsSerachLike) {
                 foreach ($columnsSerachLike as $col) {
                     $query->orWhere("$col", "LIKE", "%$search%");
-                }
-            });
-        }
-
-        // Ordenamiento
-        foreach ($orderBy as $value) {
-            if (isset($value[0], $value[1])) {
-                $users->orderBy($value[0], $value[1]);
-            }
-        }
-
-
-        $users = $users->paginate($length, ['*'], 'page', $page);
-        return $users;
-    }
-
-
-    /**
-     * Lista de users paginado con filtros (eliminados)
-     *
-     * @param integer $length
-     * @param integer $page
-     * @param string $search
-     * @param array $columnsSerachLike
-     * @param array $columnsFilter
-     * @return LengthAwarePaginator
-     */
-    public function listadoPaginadoEliminados(int $length, int $page, string $search, array $columnsSerachLike = [], array $columnsFilter = [], array $columnsBetweenFilter = [], array $orderBy = []): LengthAwarePaginator
-    {
-        $users = User::select("users.*")
-            ->where("id", "!=", 1);
-        $users->where("tipo", "!=", "POSTULANTE");
-        $users->where("status", 0);
-
-        // Filtros exactos
-        foreach ($columnsFilter as $key => $value) {
-            if (!is_null($value)) {
-                $users->where("users.$key", $value);
-            }
-        }
-
-        // Filtros por rango
-        foreach ($columnsBetweenFilter as $key => $value) {
-            if (isset($value[0], $value[1])) {
-                $users->whereBetween("users.$key", $value);
-            }
-        }
-
-        // Búsqueda en múltiples columnas con LIKE
-        if (!empty($search) && !empty($columnsSerachLike)) {
-            $users->where(function ($query) use ($search, $columnsSerachLike) {
-                foreach ($columnsSerachLike as $col) {
-                    $query->orWhere("users.$col", "LIKE", "%$search%");
                 }
             });
         }
@@ -158,10 +107,24 @@ class UserService
     public function crear(array $datos): User
     {
         $user = User::create([
-            "usuario" => mb_strtoupper($datos["usuario"]),
+            "usuario" => mb_strtolower($datos["correo"]),
+            "nombre" => mb_strtoupper($datos["nombre"]),
+            "paterno" => mb_strtoupper($datos["paterno"]),
+            "materno" => mb_strtoupper($datos["materno"]),
+            "correo" => mb_strtolower($datos["correo"]),
+            "fono" => $datos["fono"],
             "password" => $datos["password"],
+            "acceso" => $datos["acceso"],
             "tipo" => mb_strtoupper($datos["tipo"]),
+            "fecha_registro" => date("Y-m-d")
         ]);
+
+        // cargar foto
+        if (isset($datos["foto"]) && !is_string($datos["foto"])) {
+            $this->cargarFoto($user, $datos["foto"]);
+        }
+        // registrar accion
+        $this->historialAccionService->registrarAccion($this->modulo, "CREACIÓN", "REGISTRO UN USUARIO", $user);
 
         return $user;
     }
@@ -175,8 +138,16 @@ class UserService
      */
     public function actualizar(array $datos, User $user): User
     {
+        $old_user = clone $user;
+
         $user->update([
-            "usuario" => mb_strtoupper($datos["usuario"]),
+            "usuario" => mb_strtolower($datos["correo"]),
+            "nombre" => mb_strtoupper($datos["nombre"]),
+            "paterno" => mb_strtoupper($datos["paterno"]),
+            "materno" => mb_strtoupper($datos["materno"]),
+            "correo" => mb_strtolower($datos["correo"]),
+            "fono" => $datos["fono"],
+            "acceso" => $datos["acceso"],
             "tipo" => mb_strtoupper($datos["tipo"]),
         ]);
 
@@ -184,6 +155,14 @@ class UserService
             $user->password = $datos["password"];
             $user->save();
         }
+
+        // cargar foto
+        if (isset($datos["foto"]) && !is_string($datos["foto"])) {
+            $this->cargarFoto($user, $datos["foto"]);
+        }
+
+        // registrar accion
+        $this->historialAccionService->registrarAccion($this->modulo, "MODIFICACIÓN", "ACTUALIZÓ UN USUARIO", $old_user, $user->withoutRelations());
 
         return $user;
     }
@@ -212,7 +191,7 @@ class UserService
     public function cargarFoto(User $user, UploadedFile $foto): void
     {
         if ($user->foto) {
-            \File::delete(public_path("imgs/users/" . $this->user->foto));
+            \File::delete(public_path("imgs/users/" . $user->foto));
         }
 
         $nombre = $user->id . time();
@@ -228,12 +207,17 @@ class UserService
      */
     public function eliminar(User $user): bool
     {
-        $usos = Venta::where("user_id", $user->id)->get();
-        if (count($usos) > 0) {
-            throw new Exception("No es posible eliminar el registro porque esta ligado a otros registros");
-        }
+        // $usos = Venta::where("user_id", $user->id)->get();
+        // if (count($usos) > 0) {
+        //     throw new Exception("No es posible eliminar el registro porque esta ligado a otros registros");
+        // }
+
+        $old_user = clone $user;
 
         $user->delete();
+
+        // registrar accion
+        $this->historialAccionService->registrarAccion($this->modulo, "ELIMINACIÓN", "ELIMINÓ AL USUARIO " . $old_user->usuario, $old_user, $user);
 
         return true;
     }

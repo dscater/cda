@@ -2,12 +2,10 @@ import { onMounted, ref } from "vue";
 
 const oProducto = ref({
     id: 0,
+    catalogo_id: "",
     nombre: "",
-    foto: "",
-    marca: "",
-    modelo: "",
-    precio: "",
-    talla: "",
+    imagen: "",
+    estado: "PÚBLICO",
     _method: "POST",
 });
 
@@ -16,10 +14,9 @@ export const useProductos = () => {
         if (item) {
             oProducto.value.id = item.id;
             oProducto.value.nombre = item.nombre;
-            oProducto.value.marca = item.marca;
-            oProducto.value.modelo = item.modelo;
-            oProducto.value.precio = item.precio;
-            oProducto.value.talla = item.talla;
+            oProducto.value.catalogo_id = item.catalogo_id;
+            oProducto.value.imagen = item.imagen;
+            oProducto.value.estado = item.estado;
             oProducto.value._method = "PUT";
             return oProducto;
         }
@@ -28,12 +25,10 @@ export const useProductos = () => {
 
     const limpiarProducto = () => {
         oProducto.value.id = 0;
+        oProducto.value.catalogo_id = "";
         oProducto.value.nombre = "";
-        oProducto.value.foto = "";
-        oProducto.value.marca = "";
-        oProducto.value.modelo = "";
-        oProducto.value.precio = "";
-        oProducto.value.talla = "";
+        oProducto.value.imagen = "";
+        oProducto.value.estado = "PÚBLICO";
         oProducto.value._method = "POST";
     };
 
