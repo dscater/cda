@@ -15,7 +15,6 @@ export const useProductos = () => {
             oProducto.value.id = item.id;
             oProducto.value.nombre = item.nombre;
             oProducto.value.catalogo_id = item.catalogo_id;
-            oProducto.value.imagen = item.imagen;
             oProducto.value.estado = item.estado;
             oProducto.value._method = "PUT";
             return oProducto;

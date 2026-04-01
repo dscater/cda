@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 31-03-2026 a las 21:45:17
+-- Tiempo de generación: 01-04-2026 a las 16:56:12
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.2.22
 
@@ -41,7 +41,8 @@ CREATE TABLE `catalogos` (
 --
 
 INSERT INTO `catalogos` (`id`, `nombre`, `imagen`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'MENU 1', '11774990508.png', '2026-03-31 20:53:01', '2026-03-31 20:55:08', NULL);
+(1, 'MENU 1', '11775049242.png', '2026-03-31 20:53:01', '2026-04-01 13:14:02', NULL),
+(2, 'MENU 2', '21775049374.png', '2026-04-01 13:16:14', '2026-04-01 13:16:14', NULL);
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,15 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (1, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN CATALOGO', '{\"id\": 1, \"imagen\": \"11774990381.png\", \"nombre\": \"MENU 1\", \"created_at\": \"2026-03-31T20:53:01.000000Z\", \"updated_at\": \"2026-03-31T20:53:01.000000Z\"}', NULL, 'CATALOGOS', '2026-03-31', '16:53:01', '2026-03-31 20:53:01', '2026-03-31 20:53:01'),
 (2, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN CATALOGO', '{\"id\": 1, \"imagen\": \"11774990381.png\", \"nombre\": \"MENU 1\", \"created_at\": \"2026-03-31T20:53:01.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-03-31T20:53:01.000000Z\"}', '{\"id\": 1, \"imagen\": \"11774990508.png\", \"nombre\": \"MENU 1\", \"created_at\": \"2026-03-31T20:53:01.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-03-31T20:55:08.000000Z\"}', 'CATALOGOS', '2026-03-31', '16:55:08', '2026-03-31 20:55:08', '2026-03-31 20:55:08'),
 (3, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PRODUCTO', '{\"id\": 1, \"estado\": \"PÚBLICO\", \"imagen\": \"11774991329.jpeg\", \"nombre\": \"PRODUCTO 1\", \"created_at\": \"2026-03-31T21:08:49.000000Z\", \"updated_at\": \"2026-03-31T21:08:49.000000Z\", \"catalogo_id\": \"1\"}', NULL, 'PRODUCTOS', '2026-03-31', '17:08:49', '2026-03-31 21:08:49', '2026-03-31 21:08:49'),
-(4, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PRODUCTO', '{\"id\": 1, \"estado\": \"PÚBLICO\", \"imagen\": \"11774991329.jpeg\", \"nombre\": \"PRODUCTO 1\", \"created_at\": \"2026-03-31T21:08:49.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-03-31T21:08:49.000000Z\", \"catalogo_id\": 1}', '{\"id\": 1, \"estado\": \"PÚBLICO\", \"imagen\": \"11774991387.webp\", \"nombre\": \"PRODUCTO 1\", \"created_at\": \"2026-03-31T21:08:49.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-03-31T21:09:47.000000Z\", \"catalogo_id\": \"1\"}', 'PRODUCTOS', '2026-03-31', '17:09:47', '2026-03-31 21:09:47', '2026-03-31 21:09:47');
+(4, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PRODUCTO', '{\"id\": 1, \"estado\": \"PÚBLICO\", \"imagen\": \"11774991329.jpeg\", \"nombre\": \"PRODUCTO 1\", \"created_at\": \"2026-03-31T21:08:49.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-03-31T21:08:49.000000Z\", \"catalogo_id\": 1}', '{\"id\": 1, \"estado\": \"PÚBLICO\", \"imagen\": \"11774991387.webp\", \"nombre\": \"PRODUCTO 1\", \"created_at\": \"2026-03-31T21:08:49.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-03-31T21:09:47.000000Z\", \"catalogo_id\": \"1\"}', 'PRODUCTOS', '2026-03-31', '17:09:47', '2026-03-31 21:09:47', '2026-03-31 21:09:47'),
+(5, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN CATALOGO', '{\"id\": 1, \"imagen\": \"11774990508.png\", \"nombre\": \"MENU 1\", \"created_at\": \"2026-03-31T20:53:01.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-03-31T20:55:08.000000Z\"}', '{\"id\": 1, \"imagen\": \"11775049242.png\", \"nombre\": \"MENU 1\", \"created_at\": \"2026-03-31T20:53:01.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-04-01T13:14:02.000000Z\"}', 'CATALOGOS', '2026-04-01', '09:14:02', '2026-04-01 13:14:02', '2026-04-01 13:14:02'),
+(6, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN CATALOGO', '{\"id\": 2, \"imagen\": \"21775049374.png\", \"nombre\": \"MENU 2\", \"created_at\": \"2026-04-01T13:16:14.000000Z\", \"updated_at\": \"2026-04-01T13:16:14.000000Z\"}', NULL, 'CATALOGOS', '2026-04-01', '09:16:14', '2026-04-01 13:16:14', '2026-04-01 13:16:14'),
+(7, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PRODUCTO', '{\"id\": 2, \"estado\": \"PÚBLICO\", \"imagen\": \"21775049484.jpg\", \"nombre\": \"PRODUCTO 2\", \"created_at\": \"2026-04-01T13:18:04.000000Z\", \"updated_at\": \"2026-04-01T13:18:04.000000Z\", \"catalogo_id\": \"1\"}', NULL, 'PRODUCTOS', '2026-04-01', '09:18:04', '2026-04-01 13:18:04', '2026-04-01 13:18:04'),
+(8, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PRODUCTO', '{\"id\": 3, \"estado\": \"PÚBLICO\", \"imagen\": \"31775049495.jpg\", \"nombre\": \"PRODUCTO 3\", \"created_at\": \"2026-04-01T13:18:15.000000Z\", \"updated_at\": \"2026-04-01T13:18:15.000000Z\", \"catalogo_id\": \"2\"}', NULL, 'PRODUCTOS', '2026-04-01', '09:18:15', '2026-04-01 13:18:15', '2026-04-01 13:18:15'),
+(9, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PRODUCTO', '{\"id\": 4, \"estado\": \"PÚBLICO\", \"imagen\": \"41775049516.webp\", \"nombre\": \"PROUCTO 4\", \"created_at\": \"2026-04-01T13:18:36.000000Z\", \"updated_at\": \"2026-04-01T13:18:36.000000Z\", \"catalogo_id\": \"2\"}', NULL, 'PRODUCTOS', '2026-04-01', '09:18:36', '2026-04-01 13:18:36', '2026-04-01 13:18:36'),
+(10, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PRODUCTO', '{\"id\": 5, \"estado\": \"PÚBLICO\", \"imagen\": \"51775056587.jpg\", \"nombre\": \"PRODUCTO NUEVO\", \"created_at\": \"2026-04-01T15:16:27.000000Z\", \"updated_at\": \"2026-04-01T15:16:27.000000Z\", \"catalogo_id\": \"1\"}', NULL, 'PRODUCTOS', '2026-04-01', '11:16:27', '2026-04-01 15:16:27', '2026-04-01 15:16:27'),
+(11, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PRODUCTO', '{\"id\": 5, \"estado\": \"PÚBLICO\", \"imagen\": \"51775056587.jpg\", \"nombre\": \"PRODUCTO NUEVO\", \"created_at\": \"2026-04-01T15:16:27.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-04-01T15:16:27.000000Z\", \"catalogo_id\": 1}', '{\"id\": 5, \"estado\": \"DESHABILITADO\", \"imagen\": \"51775056587.jpg\", \"nombre\": \"PRODUCTO NUEVO\", \"created_at\": \"2026-04-01T15:16:27.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-04-01T15:17:30.000000Z\", \"catalogo_id\": \"1\"}', 'PRODUCTOS', '2026-04-01', '11:17:30', '2026-04-01 15:17:30', '2026-04-01 15:17:30'),
+(12, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PRODUCTO', '{\"id\": 5, \"estado\": \"DESHABILITADO\", \"imagen\": \"51775056587.jpg\", \"nombre\": \"PRODUCTO NUEVO\", \"created_at\": \"2026-04-01T15:16:27.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-04-01T15:17:30.000000Z\", \"catalogo_id\": 1}', '{\"id\": 5, \"estado\": \"PÚBLICO\", \"imagen\": \"51775056587.jpg\", \"nombre\": \"PRODUCTO NUEVO\", \"created_at\": \"2026-04-01T15:16:27.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-04-01T15:17:51.000000Z\", \"catalogo_id\": \"1\"}', 'PRODUCTOS', '2026-04-01', '11:17:51', '2026-04-01 15:17:51', '2026-04-01 15:17:51');
 
 -- --------------------------------------------------------
 
@@ -142,7 +151,11 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `catalogo_id`, `nombre`, `imagen`, `estado`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 'PRODUCTO 1', '11774991387.webp', 'PÚBLICO', '2026-03-31 21:08:49', '2026-03-31 21:09:47', NULL);
+(1, 1, 'PRODUCTO 1', '11774991387.webp', 'PÚBLICO', '2026-03-31 21:08:49', '2026-03-31 21:09:47', NULL),
+(2, 1, 'PRODUCTO 2', '21775049484.jpg', 'PÚBLICO', '2026-04-01 13:18:04', '2026-04-01 13:18:04', NULL),
+(3, 2, 'PRODUCTO 3', '31775049495.jpg', 'PÚBLICO', '2026-04-01 13:18:15', '2026-04-01 13:18:15', NULL),
+(4, 2, 'PROUCTO 4', '41775049516.webp', 'PÚBLICO', '2026-04-01 13:18:36', '2026-04-01 13:18:36', NULL),
+(5, 1, 'PRODUCTO NUEVO', '51775056587.jpg', 'PÚBLICO', '2026-04-01 15:16:27', '2026-04-01 15:17:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -260,7 +273,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `catalogos`
 --
 ALTER TABLE `catalogos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracions`
@@ -272,7 +285,7 @@ ALTER TABLE `configuracions`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -284,7 +297,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `socials`

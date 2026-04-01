@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [PortalController::class, 'index'])->name('portal');
+// portal
+Route::get('/productos/buscar', [ProductoController::class, 'buscar'])->name('productos.buscar');
+Route::get('/productos/verProducto/{producto}', [PortalController::class, 'verProducto'])->name('portal.verProducto');
+Route::get('/productos/{catalogo}', [PortalController::class, 'productos'])->name('portal.productos');
+
 
 Route::get("configuracions/getConfiguracion", [ConfiguracionController::class, 'getConfiguracion'])->name("configuracions.getConfiguracion");
 Route::get("socials/getSocial", [SocialController::class, 'getSocial'])->name("socials.getSocial");

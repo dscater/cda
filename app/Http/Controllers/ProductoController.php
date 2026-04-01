@@ -38,28 +38,18 @@ class ProductoController extends Controller
         return Inertia::render("Admin/Productos/Index");
     }
 
-    public function barras(Request $request)
+    public function buscar(Request $request)
     {
-        ini_set('memory_limit', '1024M');
-        set_time_limit(-1);
-
-        $productos = Producto::where("status", 1);
-        if ($request->producto_id && $request->producto_id != "todos") {
-            $producto_id = $request->producto_id;
-            $productos->where("id", $producto_id);
+        Log::debug("ASDASD");
+        $search = $request->input("search", "");
+        $productos = [];
+        if ($search) {
+            $productos = Producto::where("nombre", "like", "%$search%")
+                ->get();
         }
-
-        $productos = $productos->get();
-        $pdf = PDF::loadView('reportes.barras', compact('productos'));
-        $pdf->setPaper([0, 0, $this->cmToPt(4), $this->cmToPt(3)]);
-        $pdf->output();
-        return $pdf->stream('productos.pdf');
-    }
-
-
-    function cmToPt($cm)
-    {
-        return $cm * 28.346;
+        return response()->JSON([
+            "productos" => $productos
+        ]);
     }
 
     /**

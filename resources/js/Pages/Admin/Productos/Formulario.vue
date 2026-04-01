@@ -252,7 +252,7 @@ onMounted(() => {});
                         </ul>
                     </div>
                     <div class="col-md-4 mt-2">
-                        <label class="required">Acceso</label>
+                        <label class="required">Estado</label>
                         <br />
                         <el-switch
                             size="large"

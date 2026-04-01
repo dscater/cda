@@ -203,7 +203,10 @@ onMounted(() => {});
                         </ul>
                     </div>
                     <div class="col-md-5 mt-2">
-                        <label class="required">Foto</label>
+                        <label class="required">Imagen del Botón</label
+                        ><small class="text-muted"
+                            >(Tamaño recomendado: 390px x 90px)</small
+                        >
                         <input
                             type="file"
                             class="form-control"

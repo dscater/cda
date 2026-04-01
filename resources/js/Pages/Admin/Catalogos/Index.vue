@@ -181,7 +181,7 @@ const eliminarCatalogo = (item) => {
                             fixed-header
                         >
                             <template #imagen="{ item }">
-                                <img :src="item.url_imagen" height="90px" />
+                                <img :src="item.url_imagen" width="190px" />
                             </template>
                             <template #accion="{ item }">
                                 <template

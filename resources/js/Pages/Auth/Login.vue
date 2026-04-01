@@ -24,11 +24,13 @@ var url_principal = "";
 const muestra_password = ref(false);
 const enviarFormulario = () => {
     enviando.value = true;
+
     axios
         .post(route("login"), form)
         .then((response) => {
             form.usuario = "";
             form.password = "";
+            window.location.href = route("inicio");
         })
         .catch((error) => {
             if (error.response?.status === 422) {
@@ -199,6 +201,11 @@ onMounted(() => {
                                         :disabled="enviando"
                                         v-html="textBtn"
                                     ></button>
+                                    <Link
+                                        :href="route('portal')"
+                                        class="nav-link w-100 text-center text-muted text-dark"
+                                        >Ir al Portal</Link
+                                    >
                                 </div>
                             </div>
                         </form>

@@ -301,65 +301,150 @@ body.fixedContentEstudiante.modal-open
     height: 68vh;
 }
 
-/* ARCHIVOS INSCRIPCIÓN /REQUISITOS */
-.contenedorFile {
-    margin-top: 10px;
+/* INICIO PORTAL */
+.menu_inicio {
+    margin-top: 20px;
     width: 100%;
-    border: solid 2px;
-    border-radius: 7px;
-    cursor: pointer;
-    background-color: white;
-}
-.contenedorFile.cargado {
-    border-color: var(--bgSuccess);
-}
-
-.contenedorFile.cargado i,
-.contenedorFile.cargado .contInfo {
-    color: var(--bgSuccess);
-}
-
-.contenedorFile.sinCargar {
-    border-color: var(--bgDanger);
-}
-
-.contenedorFile.sinCargar i,
-.contenedorFile.sinCargar .contInfo {
-    color: var(--bgDanger);
-}
-
-.contenedorFile .contInfo .descripcion {
-    color: var(--bgGray);
-}
-
-.contenedorFile .principal {
+    min-height: 79vh;
     display: flex;
-    flex-direction: row;
+    border-radius: 10px;
+    max-height: 79vh;
+}
+.portada {
+    width: 50%;
+    overflow: hidden;
+}
+.portada img {
+    width: 100%;
+    max-height: 100%;
+    object-fit: fill;
 }
 
-.contenedorFile .principal .icon {
-    font-size: 1.6rem;
+.contenedor_producto {
+    min-width: 100%;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+}
+.contenedor_producto:active {
+    cursor: grabbing;
+}
+
+.menu_inicio .producto {
+    height: 100%;
+    display: block;
+}
+
+.menu_inicio .producto img {
+    width: 100%;
+    max-height: 100%;
+    object-fit: fill;
+}
+
+.menu {
+    width: 50%;
+    background-color: gray;
+    overflow: auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2px 5px;
+    gap: 10px;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
-.contenedorFile .contInfo {
+.menu .opcion {
+    width: 100%;
+    text-align: center;
+}
+
+.menu_inicio .pagina_inicio i,
+.menu_inicio .pagina_anterior i,
+.menu_inicio .pagina_siguiente i,
+.menu_inicio .pagina_ultimo i {
+    position: absolute;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 1.9em;
+}
+
+.menu_inicio .pagina_inicio i {
+    top: 20px;
+    left: -20px;
+}
+.menu_inicio .pagina_ultimo i {
+    top: 20px;
+    right: -20px;
+}
+
+.menu_inicio .pagina_anterior i {
+    top: 49%;
+    left: -20px;
+}
+.menu_inicio .pagina_siguiente i {
+    top: 49%;
+    right: -20px;
+}
+
+.menu .opcion img {
+    width: 96%;
+}
+
+#navbarNav {
+    position: relative;
+}
+
+/* CONTENEDOR BUSQUEDA */
+.formBusqueda {
+    position: relative;
+}
+.contenedor_busqueda_producto {
+    width: 100%;
+    border: solid 1px var(--bgWhite2);
+    position: absolute;
+    top: 37px;
+    right: 0px;
+    max-height: 65vh;
+    overflow: auto;
+}
+
+.contenedor_busqueda_producto .resultado_busqueda {
+    border: 1px solid var(--bgWhite2);
+    z-index: 1000;
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    width: calc(100% - 64px);
+    gap: 10px;
 }
 
-.contenedorFile .contInfo .title,
-.contenedorFile .contInfo .descripcion {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+.item_resultado {
+    width: 100%;
+    text-align: center;
 }
 
-.contenedorFile input[type="file"] {
-    display: none;
+.item_resultado:hover {
+    background-color: var(--bg4);
+}
+
+.item_resultado img {
+    height: 120px;
+}
+
+@media (max-width: 867px) {
+    .contenedor_busqueda_producto {
+        position: relative;
+        top: 0px;
+        right: 0px;
+    }
+
+    .portada {
+        display: none;
+    }
+
+    .menu {
+        flex: 1;
+    }
+
+    .contenedor_producto {
+        background-color: rgb(235, 235, 235);
+        padding: 10px;
+    }
 }

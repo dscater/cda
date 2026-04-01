@@ -25,7 +25,7 @@ class ProductoUpdateRequest extends FormRequest
         return [
             "catalogo_id" => "required",
             "nombre" => "required",
-            "imagen" => "required|image|mimes:webp,jpeg,png,jpg,gif,svg|max:8048",
+            "imagen" => "nullable|image|mimes:webp,jpeg,png,jpg,gif,svg|max:8048",
             "estado" => "required"
         ];
     }
