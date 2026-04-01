@@ -21,13 +21,26 @@
             width: 100%;
             height: auto;
         }
+
+        .siguiente {
+            page-break-after: always;
+        }
     </style>
 </head>
 
 <body>
+    @php
+        $cont = 0;
+    @endphp
     @foreach ($productos as $item)
         {{-- <img class="img_catalogo" src="{{ $item->imagen_b64 }}" alt=""> --}}
         <img class="img_catalogo" src="{{ public_path('imgs/productos/' . $item->imagen) }}" alt="">
+        @php
+            $cont++;
+        @endphp
+        @if ($cont < count($productos) - 1)
+            <div class="siguiente"></div>
+        @endif
     @endforeach
 </body>
 
