@@ -13,6 +13,7 @@ class Catalogo extends Model
     protected $fillable = [
         "nombre",
         "imagen",
+        "descargar"
     ];
 
     protected $appends = ["url_imagen"];
@@ -20,5 +21,10 @@ class Catalogo extends Model
     public function getUrlImagenAttribute()
     {
         return asset("imgs/catalogos/{$this->imagen}");
+    }
+
+    public function productos()
+    {
+        return $this->hasMany(Producto::class, 'catalogo_id');
     }
 }

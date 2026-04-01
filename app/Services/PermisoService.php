@@ -63,37 +63,15 @@ class PermisoService
             "configuracions.update",
             "configuracions.destroy",
 
-            "qrs.index",
-            "qrs.create",
-            "qrs.edit",
-            "qrs.update",
-            "qrs.destroy",
-            "qrs.getQr",
-
-            // "reportes.usuarios",
-            // "reportes.r_usuarios",
-            "reportes.ventas",
-            "reportes.r_ventas",
+            "reportes.usuarios",
+            "reportes.r_usuarios",
+            "reportes.catalogos",
+            "reportes.r_catalogos",
+            "reportes.visitantes",
+            "reportes.r_visitantes",
 
         ],
-        "VENDEDOR" => [
-
-            "ventas.paginado",
-            "ventas.index",
-            "ventas.listado",
-            "ventas.create",
-            "ventas.store",
-            "ventas.show",
-            "ventas.historial",
-            "ventas.paginadoHistorial",
-            "ventas.exportarPDF",
-
-            "qrs.index",
-            "qrs.getQr",
-
-            "reportes.ventas",
-            "reportes.r_ventas",
-        ],
+        "OPERADOR" => [],
     ];
 
 

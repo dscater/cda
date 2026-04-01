@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\LogVisitor;
 use App\Http\Middleware\PermisoUsuarioMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -20,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->alias([
             'permisoUsuario' => PermisoUsuarioMiddleware::class,
+            'logVisitante' => LogVisitor::class,
         ]);
         //
     })

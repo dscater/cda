@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("nombre");
             $table->string("imagen", 255)->nullable();
+            $table->integer("descargar")->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

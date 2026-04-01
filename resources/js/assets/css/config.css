@@ -17,7 +17,7 @@ td .descripcion {
 }
 
 .content-wrapper {
-    background-color: var(--bg5);
+    background-color: var(--bgWhite);
 }
 
 .text-principal {
@@ -308,6 +308,8 @@ body.fixedContentEstudiante.modal-open
     min-height: 79vh;
     display: flex;
     border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 1px 8px 10px rgba(0, 0, 0, 0.4);
     max-height: 79vh;
 }
 .portada {
@@ -343,7 +345,7 @@ body.fixedContentEstudiante.modal-open
 
 .menu {
     width: 50%;
-    background-color: gray;
+    background-color: var(--bgWhite);
     overflow: auto;
     display: flex;
     gap: 10px;
@@ -426,6 +428,10 @@ body.fixedContentEstudiante.modal-open
 
 .item_resultado img {
     height: 120px;
+}
+.nro_pagina {
+    text-align: center;
+    width: 39px;
 }
 
 @media (max-width: 867px) {

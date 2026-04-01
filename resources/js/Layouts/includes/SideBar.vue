@@ -157,6 +157,42 @@ onUnmounted(() => {});
                         :ruta="'usuarios.index'"
                         :icon="'fa fa-users'"
                     ></ItemMenu>
+                    <li
+                        class="nav-header font-weight-bold bg-principal"
+                        v-if="
+                            permisos == '*' ||
+                            permisos.includes('reportes.usuarios')
+                        "
+                    >
+                        REPORTES
+                    </li>
+                    <ItemMenu
+                        v-if="
+                            permisos == '*' ||
+                            permisos.includes('reportes.usuarios')
+                        "
+                        :label="'Usuarios'"
+                        :ruta="'reportes.usuarios'"
+                        :icon="'fa fa-file-pdf'"
+                    ></ItemMenu>
+                    <ItemMenu
+                        v-if="
+                            permisos == '*' ||
+                            permisos.includes('reportes.catalogos')
+                        "
+                        :label="'Lista de Catálogo'"
+                        :ruta="'reportes.catalogos'"
+                        :icon="'fa fa-file-pdf'"
+                    ></ItemMenu>
+                    <ItemMenu
+                        v-if="
+                            permisos == '*' ||
+                            permisos.includes('reportes.visitantes')
+                        "
+                        :label="'Visitantes de Catálogo'"
+                        :ruta="'reportes.visitantes'"
+                        :icon="'fa fa-file-pdf'"
+                    ></ItemMenu>
                     <li class="nav-header font-weight-bold bg-principal">
                         OTROS
                     </li>

@@ -82,6 +82,7 @@ class CatalogoService
     {
         $catalogo = Catalogo::create([
             "nombre" => mb_strtoupper($datos["nombre"]),
+            "descargar" => $datos["descargar"]
         ]);
 
         // cargar imagen
@@ -109,6 +110,7 @@ class CatalogoService
 
         $catalogo->update([
             "nombre" => mb_strtoupper($datos["nombre"]),
+            "descargar" => $datos["descargar"]
         ]);
 
         // cargar imagen

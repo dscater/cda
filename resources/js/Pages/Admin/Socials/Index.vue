@@ -134,12 +134,13 @@ onMounted(() => {
         <form @submit.prevent="enviarFormulario()">
             <div class="row">
                 <div class="col-md-4 form-group mb-3">
-                    <label>Whatsapp</label>
+                    <label class="required">Whatsapp</label>
                     <input
                         type="text"
                         class="form-control"
                         v-model="form.whatsapp"
                     />
+                    <small class="text-xs">Ej.: +5917777777</small>
                     <span class="text-danger" v-if="form.errors?.whatsapp">{{
                         form.errors.whatsapp
                     }}</span>

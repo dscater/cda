@@ -26,6 +26,18 @@ class Producto extends Model
         return null;
     }
 
+    public function getImagenB64Attribute()
+    {
+        $path = public_path("imgs/productos/" . $this->imagen);
+        if (file_exists($path)) {
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+            return $base64;
+        }
+        return "";
+    }
+
     public function catalogo()
     {
         return $this->belongsTo(Catalogo::class, 'catalogo_id');

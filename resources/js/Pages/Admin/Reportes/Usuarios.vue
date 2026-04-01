@@ -5,9 +5,7 @@ import { Head, usePage, Link } from "@inertiajs/vue3";
 import { useAppStore } from "@/stores/aplicacion/appStore";
 const appStore = useAppStore();
 
-const cargarListas = () => {
-    cargarRoles();
-};
+const cargarListas = () => {};
 
 const listSucursals = ref([]);
 
@@ -18,6 +16,7 @@ onMounted(() => {
 
 const form = ref({
     tipo: "todos",
+    formato: "pdf",
 });
 
 const generando = ref(false);
@@ -28,7 +27,31 @@ const txtBtn = computed(() => {
     return "Generar Reporte";
 });
 
-const listRoles = ref([]);
+const listTipos = ref([
+    {
+        value: "todos",
+        label: "TODOS",
+    },
+    {
+        value: "ADMINISTRADOR",
+        label: "ADMINISTRADOR",
+    },
+    {
+        value: "OPERADOR",
+        label: "OPERADOR",
+    },
+]);
+
+const listTipoReporte = ref([
+    {
+        value: "pdf",
+        label: "PDF",
+    },
+    {
+        value: "excel",
+        label: "EXCEL",
+    },
+]);
 
 const generarReporte = () => {
     generando.value = true;
@@ -37,16 +60,6 @@ const generarReporte = () => {
     setTimeout(() => {
         generando.value = false;
     }, 500);
-};
-
-const cargarRoles = () => {
-    axios.get(route("roles.listado")).then((response) => {
-        listRoles.value = response.data.roles;
-        listRoles.value.unshift({
-            id: "todos",
-            nombre: "TODOS",
-        });
-    });
 };
 </script>
 <template>
@@ -79,7 +92,9 @@ const cargarRoles = () => {
                         <form @submit.prevent="generarReporte">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <label>Seleccionar role*</label>
+                                    <label class="mb-0"
+                                        >Seleccionar Tipo*</label
+                                    >
                                     <select
                                         :hide-details="
                                             form.errors?.tipo ? false : true
@@ -96,10 +111,35 @@ const cargarRoles = () => {
                                         class="form-control"
                                     >
                                         <option
-                                            v-for="item in listRoles"
-                                            :value="item.id"
+                                            v-for="item in listTipos"
+                                            :value="item.value"
                                         >
-                                            {{ item.nombre }}
+                                            {{ item.label }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 mt-1">
+                                    <label class="mb-0">Formato*</label>
+                                    <select
+                                        :hide-details="
+                                            form.errors?.formato ? false : true
+                                        "
+                                        :error="
+                                            form.errors?.formato ? true : false
+                                        "
+                                        :error-messages="
+                                            form.errors?.formato
+                                                ? form.errors?.formato
+                                                : ''
+                                        "
+                                        v-model="form.formato"
+                                        class="form-control"
+                                    >
+                                        <option
+                                            v-for="item in listTipoReporte"
+                                            :value="item.value"
+                                        >
+                                            {{ item.label }}
                                         </option>
                                     </select>
                                 </div>

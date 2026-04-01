@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Catalogo;
 use App\Models\Producto;
 use App\Models\User;
 use App\Services\PermisoService;
@@ -41,6 +42,15 @@ class UserController extends Controller
                     'color' => 'bg-principal',
                     'icon' => "fa-users",
                     "url" => "usuarios.index"
+                ];
+            }
+            if ($permisos == '*' || (is_array($permisos) && in_array('catalogos.index', $permisos))) {
+                $array_infos[] = [
+                    'label' => 'MENÚ DE CATÁLOGO',
+                    'cantidad' => Catalogo::count(),
+                    'color' => 'bg-principal',
+                    'icon' => "fa-clipboard",
+                    "url" => "catalogos.index"
                 ];
             }
             if ($permisos == '*' || (is_array($permisos) && in_array('productos.index', $permisos))) {

@@ -190,22 +190,21 @@ const eliminarProducto = (item) => {
                             :header-class="'bg__primary'"
                             fixed-header
                         >
-                            <template #codigo="{ item }">
-                                <el-tooltip
-                                    class="box-item"
-                                    effect="dark"
-                                    content="Imprimir"
-                                    placement="left-start"
+                            <template #estado="{ item }">
+                                <span
+                                    class="text-md"
+                                    :class="
+                                        item.estado
+                                            ? 'badge bg-success'
+                                            : 'badge bg-danger'
+                                    "
                                 >
-                                    <button
-                                        class="btn bg1"
-                                        @click="imprimirBarras(item.id)"
-                                    >
-                                        {{ item.codigo }}
-                                        <i
-                                            class="fa fa-external-link-alt"
-                                        ></i></button
-                                ></el-tooltip>
+                                    {{
+                                        item.estado
+                                            ? "PÚBLICO"
+                                            : "DESHABILITADO"
+                                    }}
+                                </span>
                             </template>
                             <template #imagen="{ item }">
                                 <img :src="item.url_imagen" width="90px" />

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 01-04-2026 a las 16:56:12
+-- Tiempo de generación: 01-04-2026 a las 23:21:03
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.2.22
 
@@ -31,6 +31,7 @@ CREATE TABLE `catalogos` (
   `id` bigint UNSIGNED NOT NULL,
   `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `imagen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `descargar` int NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -40,9 +41,17 @@ CREATE TABLE `catalogos` (
 -- Volcado de datos para la tabla `catalogos`
 --
 
-INSERT INTO `catalogos` (`id`, `nombre`, `imagen`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'MENU 1', '11775049242.png', '2026-03-31 20:53:01', '2026-04-01 13:14:02', NULL),
-(2, 'MENU 2', '21775049374.png', '2026-04-01 13:16:14', '2026-04-01 13:16:14', NULL);
+INSERT INTO `catalogos` (`id`, `nombre`, `imagen`, `descargar`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'MENU 1', '11775049242.png', 0, '2026-03-31 20:53:01', '2026-04-01 20:10:06', NULL),
+(2, 'MENU 2', '21775049374.png', 1, '2026-04-01 13:16:14', '2026-04-01 13:16:14', NULL),
+(3, 'MENU 3', '31775080005.png', 1, '2026-04-01 21:46:45', '2026-04-01 21:46:45', NULL),
+(4, 'MENU 4', '41775080014.png', 1, '2026-04-01 21:46:54', '2026-04-01 21:46:54', NULL),
+(5, 'MENU 5', '51775080021.png', 1, '2026-04-01 21:47:01', '2026-04-01 21:47:01', NULL),
+(6, 'MENU 6', '61775080030.png', 1, '2026-04-01 21:47:10', '2026-04-01 21:47:10', NULL),
+(7, 'MENU 7', '71775080038.png', 1, '2026-04-01 21:47:18', '2026-04-01 21:47:18', NULL),
+(8, 'MENU 8', '81775080049.png', 1, '2026-04-01 21:47:29', '2026-04-01 21:47:29', NULL),
+(9, 'MENU 9', '91775080085.png', 1, '2026-04-01 21:48:05', '2026-04-01 21:48:05', NULL),
+(10, 'MENU 10', '101775080092.png', 1, '2026-04-01 21:48:12', '2026-04-01 21:48:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -65,7 +74,7 @@ CREATE TABLE `configuracions` (
 --
 
 INSERT INTO `configuracions` (`id`, `nombre_sistema`, `alias`, `logo`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'SISTEMA SVT', 'SVT', 'logo.png', NULL, '2026-03-16 19:52:06', NULL);
+(1, 'SISTEMA CDA', 'CDA', 'logo.png', NULL, '2026-04-01 21:49:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -103,7 +112,16 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (9, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PRODUCTO', '{\"id\": 4, \"estado\": \"PÚBLICO\", \"imagen\": \"41775049516.webp\", \"nombre\": \"PROUCTO 4\", \"created_at\": \"2026-04-01T13:18:36.000000Z\", \"updated_at\": \"2026-04-01T13:18:36.000000Z\", \"catalogo_id\": \"2\"}', NULL, 'PRODUCTOS', '2026-04-01', '09:18:36', '2026-04-01 13:18:36', '2026-04-01 13:18:36'),
 (10, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PRODUCTO', '{\"id\": 5, \"estado\": \"PÚBLICO\", \"imagen\": \"51775056587.jpg\", \"nombre\": \"PRODUCTO NUEVO\", \"created_at\": \"2026-04-01T15:16:27.000000Z\", \"updated_at\": \"2026-04-01T15:16:27.000000Z\", \"catalogo_id\": \"1\"}', NULL, 'PRODUCTOS', '2026-04-01', '11:16:27', '2026-04-01 15:16:27', '2026-04-01 15:16:27'),
 (11, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PRODUCTO', '{\"id\": 5, \"estado\": \"PÚBLICO\", \"imagen\": \"51775056587.jpg\", \"nombre\": \"PRODUCTO NUEVO\", \"created_at\": \"2026-04-01T15:16:27.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-04-01T15:16:27.000000Z\", \"catalogo_id\": 1}', '{\"id\": 5, \"estado\": \"DESHABILITADO\", \"imagen\": \"51775056587.jpg\", \"nombre\": \"PRODUCTO NUEVO\", \"created_at\": \"2026-04-01T15:16:27.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-04-01T15:17:30.000000Z\", \"catalogo_id\": \"1\"}', 'PRODUCTOS', '2026-04-01', '11:17:30', '2026-04-01 15:17:30', '2026-04-01 15:17:30'),
-(12, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PRODUCTO', '{\"id\": 5, \"estado\": \"DESHABILITADO\", \"imagen\": \"51775056587.jpg\", \"nombre\": \"PRODUCTO NUEVO\", \"created_at\": \"2026-04-01T15:16:27.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-04-01T15:17:30.000000Z\", \"catalogo_id\": 1}', '{\"id\": 5, \"estado\": \"PÚBLICO\", \"imagen\": \"51775056587.jpg\", \"nombre\": \"PRODUCTO NUEVO\", \"created_at\": \"2026-04-01T15:16:27.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-04-01T15:17:51.000000Z\", \"catalogo_id\": \"1\"}', 'PRODUCTOS', '2026-04-01', '11:17:51', '2026-04-01 15:17:51', '2026-04-01 15:17:51');
+(12, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PRODUCTO', '{\"id\": 5, \"estado\": \"DESHABILITADO\", \"imagen\": \"51775056587.jpg\", \"nombre\": \"PRODUCTO NUEVO\", \"created_at\": \"2026-04-01T15:16:27.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-04-01T15:17:30.000000Z\", \"catalogo_id\": 1}', '{\"id\": 5, \"estado\": \"PÚBLICO\", \"imagen\": \"51775056587.jpg\", \"nombre\": \"PRODUCTO NUEVO\", \"created_at\": \"2026-04-01T15:16:27.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-04-01T15:17:51.000000Z\", \"catalogo_id\": \"1\"}', 'PRODUCTOS', '2026-04-01', '11:17:51', '2026-04-01 15:17:51', '2026-04-01 15:17:51'),
+(13, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN CATALOGO', '{\"id\": 1, \"imagen\": \"11775049242.png\", \"nombre\": \"MENU 1\", \"descargar\": 1, \"created_at\": \"2026-03-31T20:53:01.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-04-01T13:14:02.000000Z\"}', '{\"id\": 1, \"imagen\": \"11775049242.png\", \"nombre\": \"MENU 1\", \"descargar\": \"0\", \"created_at\": \"2026-03-31T20:53:01.000000Z\", \"deleted_at\": null, \"updated_at\": \"2026-04-01T20:10:06.000000Z\"}', 'CATALOGOS', '2026-04-01', '16:10:06', '2026-04-01 20:10:06', '2026-04-01 20:10:06'),
+(14, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN CATALOGO', '{\"id\": 3, \"imagen\": \"31775080005.png\", \"nombre\": \"MENU 3\", \"descargar\": \"1\", \"created_at\": \"2026-04-01T21:46:45.000000Z\", \"updated_at\": \"2026-04-01T21:46:45.000000Z\"}', NULL, 'CATALOGOS', '2026-04-01', '17:46:45', '2026-04-01 21:46:45', '2026-04-01 21:46:45'),
+(15, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN CATALOGO', '{\"id\": 4, \"imagen\": \"41775080014.png\", \"nombre\": \"MENU 4\", \"descargar\": \"1\", \"created_at\": \"2026-04-01T21:46:54.000000Z\", \"updated_at\": \"2026-04-01T21:46:54.000000Z\"}', NULL, 'CATALOGOS', '2026-04-01', '17:46:54', '2026-04-01 21:46:54', '2026-04-01 21:46:54'),
+(16, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN CATALOGO', '{\"id\": 5, \"imagen\": \"51775080021.png\", \"nombre\": \"MENU 5\", \"descargar\": \"1\", \"created_at\": \"2026-04-01T21:47:01.000000Z\", \"updated_at\": \"2026-04-01T21:47:01.000000Z\"}', NULL, 'CATALOGOS', '2026-04-01', '17:47:01', '2026-04-01 21:47:01', '2026-04-01 21:47:01'),
+(17, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN CATALOGO', '{\"id\": 6, \"imagen\": \"61775080030.png\", \"nombre\": \"MENU 6\", \"descargar\": \"1\", \"created_at\": \"2026-04-01T21:47:10.000000Z\", \"updated_at\": \"2026-04-01T21:47:10.000000Z\"}', NULL, 'CATALOGOS', '2026-04-01', '17:47:10', '2026-04-01 21:47:10', '2026-04-01 21:47:10'),
+(18, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN CATALOGO', '{\"id\": 7, \"imagen\": \"71775080038.png\", \"nombre\": \"MENU 7\", \"descargar\": \"1\", \"created_at\": \"2026-04-01T21:47:18.000000Z\", \"updated_at\": \"2026-04-01T21:47:18.000000Z\"}', NULL, 'CATALOGOS', '2026-04-01', '17:47:18', '2026-04-01 21:47:18', '2026-04-01 21:47:18'),
+(19, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN CATALOGO', '{\"id\": 8, \"imagen\": \"81775080049.png\", \"nombre\": \"MENU 8\", \"descargar\": \"1\", \"created_at\": \"2026-04-01T21:47:29.000000Z\", \"updated_at\": \"2026-04-01T21:47:29.000000Z\"}', NULL, 'CATALOGOS', '2026-04-01', '17:47:29', '2026-04-01 21:47:29', '2026-04-01 21:47:29'),
+(20, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN CATALOGO', '{\"id\": 9, \"imagen\": \"91775080085.png\", \"nombre\": \"MENU 9\", \"descargar\": \"1\", \"created_at\": \"2026-04-01T21:48:05.000000Z\", \"updated_at\": \"2026-04-01T21:48:05.000000Z\"}', NULL, 'CATALOGOS', '2026-04-01', '17:48:05', '2026-04-01 21:48:05', '2026-04-01 21:48:05'),
+(21, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN CATALOGO', '{\"id\": 10, \"imagen\": \"101775080092.png\", \"nombre\": \"MENU 10\", \"descargar\": \"1\", \"created_at\": \"2026-04-01T21:48:12.000000Z\", \"updated_at\": \"2026-04-01T21:48:12.000000Z\"}', NULL, 'CATALOGOS', '2026-04-01', '17:48:12', '2026-04-01 21:48:12', '2026-04-01 21:48:12');
 
 -- --------------------------------------------------------
 
@@ -127,7 +145,56 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2024_11_02_153318_create_historial_accions_table', 1),
 (4, '2026_03_30_160030_create_catalogos_table', 1),
 (5, '2026_03_30_160031_create_productos_table', 1),
-(6, '2026_03_30_160227_create_socials_table', 1);
+(6, '2026_03_30_160227_create_socials_table', 1),
+(7, '2026_04_01_171321_create_pedidos_table', 2),
+(8, '2026_04_01_171324_create_pedido_detalles_table', 2),
+(9, '2026_04_01_182619_create_visitantes_table', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedidos`
+--
+
+CREATE TABLE `pedidos` (
+  `id` bigint UNSIGNED NOT NULL,
+  `ip_cliente` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pdf` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`id`, `ip_cliente`, `pdf`, `fecha`, `hora`, `created_at`, `updated_at`) VALUES
+(1, '127.0.0.1', 'pedido_1.pdf', '2026-04-01', '17:42:54', '2026-04-01 21:42:54', '2026-04-01 21:42:59');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedido_detalles`
+--
+
+CREATE TABLE `pedido_detalles` (
+  `id` bigint UNSIGNED NOT NULL,
+  `pedido_id` bigint UNSIGNED NOT NULL,
+  `producto_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `pedido_detalles`
+--
+
+INSERT INTO `pedido_detalles` (`id`, `pedido_id`, `producto_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 4, '2026-04-01 21:42:54', '2026-04-01 21:42:54'),
+(2, 1, 1, '2026-04-01 21:42:54', '2026-04-01 21:42:54'),
+(3, 1, 5, '2026-04-01 21:42:54', '2026-04-01 21:42:54');
 
 -- --------------------------------------------------------
 
@@ -183,7 +250,7 @@ CREATE TABLE `socials` (
 --
 
 INSERT INTO `socials` (`id`, `whatsapp`, `facebook`, `tiktok`, `instagram`, `youtube`, `x`, `web`, `correo`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '73594451', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-31 21:21:51', '2026-03-31 21:21:55', NULL);
+(1, '+59173594451', 'https://facebook.com', 'https://tiktok.com', 'https://instagram.com', 'https://youtube.com', 'https://x.com', 'www.google.com', 'correo@gmail.com', '2026-03-31 21:21:51', '2026-04-01 21:36:41', NULL);
 
 -- --------------------------------------------------------
 
@@ -218,6 +285,40 @@ INSERT INTO `users` (`id`, `usuario`, `nombre`, `paterno`, `materno`, `correo`, 
 (2, 'juan@gmail.com', 'JUAN', 'PERES', 'MAMANI', 'juan@gmail.com', '78787878', '$2y$12$GZh2qQ0RqNR.dK0ms/iGPODh9Xc3bgOBV4LbzNPfBb4yOXnWf3PL2', 1, 'OPERADOR', '21774988990.jpg', '2026-03-31', '2026-03-31 20:26:48', '2026-03-31 20:29:50', NULL),
 (3, 'maria@gmail.com', 'MARIA', 'GONZALES', 'MAMANI', 'maria@gmail.com', '68686868', '$2y$12$0PLGno3XV30aT5ZPROOAle3uZNxrOkuHrb5VVU9MDeafzOxAqFzYK', 1, 'OPERADOR', '31774989056.jpg', '2026-03-31', '2026-03-31 20:30:56', '2026-03-31 20:34:43', NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `visitantes`
+--
+
+CREATE TABLE `visitantes` (
+  `id` bigint UNSIGNED NOT NULL,
+  `ip` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
+  `browser` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `platform` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `device` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `referer` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `visitantes`
+--
+
+INSERT INTO `visitantes` (`id`, `ip`, `user_agent`, `browser`, `platform`, `device`, `url`, `referer`, `created_at`, `updated_at`) VALUES
+(1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'Desktop', 'http://cda.test/productos/1?page=2', 'http://cda.test/productos/1?page=2', '2026-04-01 22:36:43', '2026-04-01 22:36:43'),
+(2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'Desktop', 'http://cda.test/productos/1?page=2', 'http://cda.test/productos/1?page=2', '2026-04-01 22:37:45', '2026-04-01 22:37:45'),
+(3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'Desktop', 'http://cda.test/productos/1?page=2', 'http://cda.test/productos/1?page=2', '2026-04-01 22:47:26', '2026-04-01 22:47:26'),
+(4, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'Desktop', 'http://cda.test/productos/1?page=2', NULL, '2026-04-01 22:54:23', '2026-04-01 22:54:23'),
+(5, '192.168.100.3', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36', 'Chrome', 'AndroidOS', 'Mobile', 'http://192.168.100.128:8081', NULL, '2026-04-01 23:04:01', '2026-04-01 23:04:01'),
+(6, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'Desktop', 'http://cda.test', NULL, '2026-04-01 23:04:33', '2026-04-01 23:04:33'),
+(7, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'Desktop', 'http://cda.test/productos/1', NULL, '2026-04-01 23:10:30', '2026-04-01 23:10:30'),
+(8, '127.0.0.1', 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1', 'Safari', 'iOS', 'Mobile', 'https://cda.test/productos/1?page=1', 'https://cda.test/productos/1', '2026-04-01 23:15:32', '2026-04-01 23:15:32'),
+(9, '127.0.0.1', 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1', 'Safari', 'iOS', 'Mobile', 'https://cda.test/productos/1?page=2', 'https://cda.test/productos/1?page=3', '2026-04-01 23:20:32', '2026-04-01 23:20:32');
+
 --
 -- Índices para tablas volcadas
 --
@@ -248,6 +349,20 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `pedido_detalles`
+--
+ALTER TABLE `pedido_detalles`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pedido_detalles_pedido_id_foreign` (`pedido_id`),
+  ADD KEY `pedido_detalles_producto_id_foreign` (`producto_id`);
+
+--
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
@@ -266,6 +381,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `visitantes`
+--
+ALTER TABLE `visitantes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -273,7 +394,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `catalogos`
 --
 ALTER TABLE `catalogos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracions`
@@ -285,13 +406,25 @@ ALTER TABLE `configuracions`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `pedido_detalles`
+--
+ALTER TABLE `pedido_detalles`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -312,6 +445,12 @@ ALTER TABLE `users`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `visitantes`
+--
+ALTER TABLE `visitantes`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -320,6 +459,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `historial_accions`
   ADD CONSTRAINT `historial_accions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Filtros para la tabla `pedido_detalles`
+--
+ALTER TABLE `pedido_detalles`
+  ADD CONSTRAINT `pedido_detalles_pedido_id_foreign` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pedido_detalles_producto_id_foreign` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

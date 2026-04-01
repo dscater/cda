@@ -34,7 +34,7 @@ class User extends Authenticatable
         "fecha_registro",
     ];
 
-    protected $appends = ["permisos", "url_foto"];
+    protected $appends = ["permisos", "url_foto", "foto_b64", "fecha_registro_t"];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -57,7 +57,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
+    public function getFechaRegistroTAttribute()
+    {
+        return date("d/m/Y", strtotime($this->fecha_registro));
+    }
     public function getUrlFotoAttribute()
     {
         if ($this->foto) {
@@ -70,5 +73,16 @@ class User extends Authenticatable
     {
         $permisoService = new PermisoService();
         return $permisoService->getPermisosUser();
+    }
+    public function getFotoB64Attribute()
+    {
+        $path = public_path("imgs/users/" . $this->foto);
+        if (!$this->foto || !file_exists($path)) {
+            $path = public_path("imgs/users/default.png");
+        }
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        return $base64;
     }
 }

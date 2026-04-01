@@ -14,12 +14,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', [PortalController::class, 'index'])->name('portal');
+
 // portal
 Route::get('/productos/buscar', [ProductoController::class, 'buscar'])->name('productos.buscar');
-Route::get('/productos/verProducto/{producto}', [PortalController::class, 'verProducto'])->name('portal.verProducto');
-Route::get('/productos/{catalogo}', [PortalController::class, 'productos'])->name('portal.productos');
-
+Route::get('/productos/miCatalogo', [PortalController::class, 'miCatalogo'])->name('portal.miCatalogo');
+Route::post('/productos/crearPedido', [PortalController::class, 'crearPedido'])->name('portal.crearPedido');
+Route::get('/productos/descargar_catalogo/{catalogo}', [PortalController::class, 'descargar_catalogo'])->name('portal.descargar_catalogo');
+Route::middleware(['logVisitante'])->group(function () {
+    Route::get('/', [PortalController::class, 'index'])->name('portal');
+    Route::get('/productos/verProducto/{producto}', [PortalController::class, 'verProducto'])->name('portal.verProducto');
+    Route::get('/productos/{catalogo}', [PortalController::class, 'productos'])->name('portal.productos');
+});
 
 Route::get("configuracions/getConfiguracion", [ConfiguracionController::class, 'getConfiguracion'])->name("configuracions.getConfiguracion");
 Route::get("socials/getSocial", [SocialController::class, 'getSocial'])->name("socials.getSocial");
@@ -83,5 +88,11 @@ Route::middleware(['auth', 'permisoUsuario'])->prefix("admin")->group(function (
     // REPORTES
     Route::get('reportes/usuarios', [ReporteController::class, 'usuarios'])->name("reportes.usuarios");
     Route::get('reportes/r_usuarios', [ReporteController::class, 'r_usuarios'])->name("reportes.r_usuarios");
+
+    Route::get('reportes/catalogos', [ReporteController::class, 'catalogos'])->name("reportes.catalogos");
+    Route::get('reportes/r_catalogos', [ReporteController::class, 'r_catalogos'])->name("reportes.r_catalogos");
+
+    Route::get('reportes/visitantes', [ReporteController::class, 'visitantes'])->name("reportes.visitantes");
+    Route::get('reportes/r_visitantes', [ReporteController::class, 'r_visitantes'])->name("reportes.r_visitantes");
 });
 require __DIR__ . '/auth.php';

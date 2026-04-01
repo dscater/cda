@@ -22,7 +22,7 @@ class SocialRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "whatsapp" => "nullable",
+            "whatsapp" => "required",
             "facebook" => "nullable",
             "tiktok" => "nullable",
             "instagram" => "nullable",

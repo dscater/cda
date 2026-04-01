@@ -37,8 +37,13 @@ const headers = [
         sortable: true,
     },
     {
-        label: "IMAGEN",
+        label: "IMAGEN BOTÓN",
         key: "imagen",
+        sortable: true,
+    },
+    {
+        label: "DESCARGA",
+        key: "descargar",
         sortable: true,
     },
     {
@@ -61,12 +66,6 @@ const agregarRegistro = () => {
     limpiarCatalogo();
     accion_formulario.value = 0;
     muestra_formulario.value = true;
-};
-
-const imprimirBarras = (id) => {
-    const url = route("catalogos.barras") + "?catalogo_id=" + id;
-
-    window.open(url, "_blank");
 };
 
 const updateDatatable = async () => {
@@ -182,6 +181,22 @@ const eliminarCatalogo = (item) => {
                         >
                             <template #imagen="{ item }">
                                 <img :src="item.url_imagen" width="190px" />
+                            </template>
+                            <template #descargar="{ item }">
+                                <span
+                                    class="text-md"
+                                    :class="
+                                        item.descargar
+                                            ? 'badge bg-success'
+                                            : 'badge bg-danger'
+                                    "
+                                >
+                                    {{
+                                        item.descargar
+                                            ? "HABILITADO"
+                                            : "DESHABILITADO"
+                                    }}
+                                </span>
                             </template>
                             <template #accion="{ item }">
                                 <template

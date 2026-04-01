@@ -22,8 +22,9 @@ class CatalogoStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "nombre" => "required|string",
+            "nombre" => "required|string|unique:catalogos,nombre",
             "imagen" => "required|image|mimes:webp,jpeg,png,jpg,gif,svg|max:4096",
+            "descargar" => "required"
         ];
     }
 

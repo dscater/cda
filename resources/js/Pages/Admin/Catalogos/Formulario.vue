@@ -205,7 +205,7 @@ onMounted(() => {});
                     <div class="col-md-5 mt-2">
                         <label class="required">Imagen del Botón</label
                         ><small class="text-muted"
-                            >(Tamaño recomendado: 390px x 90px)</small
+                            >(Tamaño recomendado: 530px x 90px)</small
                         >
                         <input
                             type="file"
@@ -224,6 +224,22 @@ onMounted(() => {});
                                 {{ form.errors?.imagen }}
                             </li>
                         </ul>
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <label class="required">Permitir descarga</label>
+                        <br />
+                        <el-switch
+                            size="large"
+                            active-text="HABILITADO"
+                            inactive-text="DESHABILITADO"
+                            v-model="form.descargar"
+                            :active-value="1"
+                            :inactive-value="0"
+                            style="
+                                --el-switch-on-color: #13ce66;
+                                --el-switch-off-color: #ff4949;
+                            "
+                        />
                     </div>
                 </div>
             </form>
