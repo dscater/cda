@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\ConfiguracionController;
+use App\Http\Controllers\IconoController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\ProductoController;
@@ -35,6 +36,8 @@ Route::get('/clear-cache', function () {
     Artisan::call('optimize');
     return 'Cache eliminado <a href="/">Ir al inicio</a>';
 })->name('clear.cache');
+
+Route::get("iconos/getIconos", [IconoController::class, 'lista'])->name("iconos.lista");
 
 // ADMINISTRACION
 Route::middleware(['auth', 'permisoUsuario'])->prefix("admin")->group(function () {

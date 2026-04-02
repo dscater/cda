@@ -25,10 +25,17 @@ const buscarProducto = () => {
         });
 };
 
+const intervalSearch = ref(null);
 const onSearch = () => {
-    if (!txtSearch.value) {
-        listBusqueda.value = [];
-    }
+    console.log("AAAAAAAAAAA");
+    clearInterval(intervalSearch.value);
+    intervalSearch.value = setTimeout(() => {
+        if (!txtSearch.value) {
+            listBusqueda.value = [];
+        } else {
+            buscarProducto();
+        }
+    }, 270);
 };
 
 onMounted(() => {
@@ -98,22 +105,6 @@ onBeforeMount(() => {});
                                 ></Link
                             >
                         </li>
-                        <li class="nav-item">
-                            <Link
-                                class="nav-link"
-                                :href="route('login')"
-                                v-if="!auth.user"
-                            >
-                                <i class="fa fa-sign-in-alt"></i>
-                            </Link>
-                            <Link
-                                class="nav-link"
-                                :href="route('inicio')"
-                                v-else
-                            >
-                                <i class="fa fa-user"></i>
-                            </Link>
-                        </li>
                     </ul>
                     <form class="form-inline formBusqueda">
                         <div class="input-group">
@@ -123,7 +114,7 @@ onBeforeMount(() => {});
                                 placeholder="Buscar"
                                 aria-label="Buscar"
                                 v-model="txtSearch"
-                                @search="onSearch"
+                                @keyup.prevent="onSearch"
                                 @keypress.enter.prevent="buscarProducto"
                             />
                             <div class="input-group-append">
@@ -160,6 +151,19 @@ onBeforeMount(() => {});
                                             alt="Imagen"
                                         />
                                     </Link>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="contenedor_busqueda_producto"
+                            v-if="
+                                listBusqueda.length == 0 &&
+                                txtSearch.trim() != ''
+                            "
+                        >
+                            <div class="resultado_busqueda">
+                                <div class="w-100 text-center mb-2">
+                                    No se encontró ninguna coincidencia
                                 </div>
                             </div>
                         </div>
@@ -244,6 +248,22 @@ onBeforeMount(() => {});
                     >
                         <i class="fa fa-envelope"></i>
                     </a>
+                </div>
+                <div class="col-12 text-center">
+                    <Link
+                        class="text-dark text-lg"
+                        :href="route('login')"
+                        v-if="!auth.user"
+                    >
+                        <i class="fa fa-sign-in-alt"></i>
+                    </Link>
+                    <Link
+                        class="text-dark text-lg"
+                        :href="route('inicio')"
+                        v-else
+                    >
+                        <i class="fa fa-user"></i>
+                    </Link>
                 </div>
             </div>
         </div>

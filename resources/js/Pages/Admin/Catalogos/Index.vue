@@ -180,7 +180,14 @@ const eliminarCatalogo = (item) => {
                             fixed-header
                         >
                             <template #imagen="{ item }">
-                                <img :src="item.url_imagen" width="190px" />
+                                <img
+                                    :src="item.url_imagen"
+                                    width="190px"
+                                    v-if="item.tipo == 'imagen'"
+                                />
+                                <span v-else
+                                    ><i class="fa-3x" :class="item.imagen"></i
+                                ></span>
                             </template>
                             <template #descargar="{ item }">
                                 <span

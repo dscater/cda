@@ -20,8 +20,6 @@ class ConfiguracionService
      */
     public function actualizar(array $datos, Configuracion $configuracion): Configuracion
     {
-        $old_area = clone $configuracion;
-
         $configuracion = Configuracion::first();
         if (!$configuracion) {
             $configuracion = Configuracion::create([
@@ -37,19 +35,25 @@ class ConfiguracionService
 
         // cargar logo
         if ($datos["logo"] && !is_string($datos["logo"])) {
-            $this->cargarLogo($configuracion, $datos["logo"]);
+            $this->cargarImagen($configuracion, $datos["logo"], "logo");
         }
+
+        // cargar portada
+        if ($datos["portada"] && !is_string($datos["portada"])) {
+            $this->cargarImagen($configuracion, $datos["portada"], "portada");
+        }
+
 
         return $configuracion;
     }
 
-    public function cargarLogo(Configuracion $configuracion, UploadedFile $logo): void
+    public function cargarImagen(Configuracion $configuracion, UploadedFile $logo, String $col): void
     {
-        if ($configuracion->logo) {
-            \File::delete(public_path("imgs/" . $this->configuracion->logo));
+        if ($configuracion[$col]) {
+            \File::delete(public_path("imgs/" . $configuracion[$col]));
         }
-        $nombre = $configuracion->id . time();
-        $configuracion->logo = $this->cargarArchivoService->cargarArchivo($logo, public_path("imgs"), $nombre);
+        $nombre = $col . $configuracion->id . time();
+        $configuracion[$col] = $this->cargarArchivoService->cargarArchivo($logo, public_path("imgs"), $nombre);
         $configuracion->save();
     }
 }

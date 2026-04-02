@@ -12,6 +12,7 @@ class PedidoDetalle extends Model
     protected $fillable = [
         "pedido_id",
         "producto_id",
+        "precio"
     ];
 
     public function pedido()

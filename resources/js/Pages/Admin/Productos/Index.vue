@@ -37,8 +37,18 @@ const headers = [
         sortable: true,
     },
     {
+        label: "CÓDIGO",
+        key: "codigo",
+        sortable: true,
+    },
+    {
         label: "NOMBRE",
         key: "nombre",
+        sortable: true,
+    },
+    {
+        label: "PRECIO",
+        key: "precio",
         sortable: true,
     },
     {

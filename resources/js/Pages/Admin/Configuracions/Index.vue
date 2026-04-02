@@ -36,6 +36,8 @@ if (props_page.configuracion != null) {
         alias: "",
         url_logo: "",
         logo: "",
+        url_portada: "",
+        portada: "",
     });
 }
 
@@ -82,6 +84,7 @@ const enviarFormulario = () => {
     });
 };
 const logo = ref(null);
+const portada = ref(null);
 function cargaArchivo(e, key) {
     form[key] = null;
     form[key] = e.target.files[0];
@@ -91,7 +94,8 @@ function cargaArchivo(e, key) {
     form["url_" + key] = fileUrl;
 }
 function limpiaRefs() {
-    logo.value = null;
+    logo.value.value = null;
+    portada.value.value = null;
 }
 
 const btnGuardar = computed(() => {
@@ -171,6 +175,26 @@ onMounted(() => {
                     </div>
                     <span class="text-danger" v-if="form.errors?.logo">{{
                         form.errors.logo
+                    }}</span>
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label class="required">Portada</label>
+                    <input
+                        type="file"
+                        class="form-control"
+                        @change="cargaArchivo($event, 'portada')"
+                        ref="portada"
+                    />
+                    <div class="portada_muestra w-100 text-center">
+                        <img
+                            :src="form.url_portada"
+                            alt=""
+                            v-if="form.url_portada"
+                            width="50%"
+                        />
+                    </div>
+                    <span class="text-danger" v-if="form.errors?.portada">{{
+                        form.errors.portada
                     }}</span>
                 </div>
             </div>

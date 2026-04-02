@@ -14,11 +14,17 @@ class Configuracion extends Model
         "nombre_sistema",
         "alias",
         "logo",
+        "portada",
     ];
 
     protected $casts = [];
 
-    protected $appends = ["url_logo", "logo_b64"];
+    protected $appends = ["url_logo", "logo_b64", "url_portada"];
+
+    public function getUrlPortadaAttribute()
+    {
+        return asset("imgs/" . $this->portada);
+    }
 
     public function getUrlLogoAttribute()
     {

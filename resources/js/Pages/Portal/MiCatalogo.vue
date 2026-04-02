@@ -64,6 +64,25 @@ const crearPedido = () => {
     });
 };
 
+const quitar = (index) => {
+    Swal.fire({
+        title: "¿Quierés quitar este producto?",
+        html: ``,
+        showCancelButton: true,
+        confirmButtonText: "Si, quitar",
+        cancelButtonText: "No, cancelar",
+        denyButtonText: `No, cancelar`,
+        customClass: {
+            confirmButton: "btn-danger",
+        },
+    }).then(async (result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            catalogoStore.quitarProducto(index);
+        }
+    });
+};
+
 onMounted(() => {});
 
 onBeforeUnmount(() => {});
@@ -92,8 +111,17 @@ onBeforeUnmount(() => {});
                         <div class="productos">
                             <div
                                 class="producto"
-                                v-for="item in catalogoStore.listProductos"
+                                v-for="(
+                                    item, index
+                                ) in catalogoStore.listProductos"
                             >
+                                <button
+                                    class="btn btn-danger quitarProducto"
+                                    @click="quitar(index)"
+                                >
+                                    X
+                                </button>
+
                                 <img :src="item.url_imagen" alt="" />
                             </div>
                         </div>
@@ -129,8 +157,13 @@ onBeforeUnmount(() => {});
     border-radius: 15px;
     display: block;
     height: auto;
+    position: relative;
 }
 .productos .producto img {
     width: 100%;
+}
+
+.quitarProducto {
+    position: absolute;
 }
 </style>

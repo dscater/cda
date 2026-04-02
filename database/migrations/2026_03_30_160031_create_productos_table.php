@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string("nombre");
             $table->string("imagen", 255)->nullable();
             $table->string("estado");
+            $table->string("codigo");
+            $table->decimal("precio", 24, 2)->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

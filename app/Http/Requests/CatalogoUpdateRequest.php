@@ -21,11 +21,19 @@ class CatalogoUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             "nombre" => "required|string|unique:catalogos,nombre," . $this->catalogo->id,
-            "imagen" => "nullable|image|mimes:webp,jpeg,png,jpg,gif,svg|max:4096",
-            "descargar" => "required"
+            "tipo" => "required",
+            "descargar" => "required",
         ];
+
+        if ($this->tipo === 'imagen') {
+            $rules["imagen"] = "required|image|mimes:webp,jpeg,png,jpg,gif,svg|max:4096";
+        } else {
+            $rules["imagen"] = "required|string";
+        }
+
+        return $rules;
     }
 
     public function messages()

@@ -82,6 +82,8 @@ class ProductoService
     {
         $producto = Producto::create([
             "catalogo_id" => $datos["catalogo_id"],
+            "codigo" => mb_strtoupper($datos["codigo"]),
+            "precio" => $datos["precio"],
             "nombre" => mb_strtoupper($datos["nombre"]),
             "estado" => mb_strtoupper($datos["estado"]),
         ]);
@@ -110,6 +112,8 @@ class ProductoService
 
         $producto->update([
             "catalogo_id" => $datos["catalogo_id"],
+            "codigo" => mb_strtoupper($datos["codigo"]),
+            "precio" => $datos["precio"],
             "nombre" => mb_strtoupper($datos["nombre"]),
             "estado" => mb_strtoupper($datos["estado"]),
         ]);

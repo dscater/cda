@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string("nombre_sistema", 255);
             $table->string("alias", 255)->nullable();
             $table->string("logo")->nullable();
+            $table->string("portada")->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

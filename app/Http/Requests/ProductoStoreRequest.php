@@ -23,6 +23,8 @@ class ProductoStoreRequest extends FormRequest
     {
         return [
             "catalogo_id" => "required",
+            "codigo" => "required|unique:productos,codigo",
+            "precio" => "required|decimal:0,2",
             "nombre" => "required",
             "imagen" => "required|image|mimes:webp,jpeg,png,jpg,gif,svg|max:8048",
             "estado" => "required"
@@ -33,6 +35,10 @@ class ProductoStoreRequest extends FormRequest
     {
         return [
             "catalogo_id.required" => "Debes seleccionar el menú",
+            "codigo.required" => "Debes seleccionar el menú",
+            "codigo.unique" => "El código ingresado ya fue registrado",
+            "precio.required" => "Debes seleccionar el menú",
+            "precio.decimal" => "Debes ingresar un valor con hasta 2 decimales",
             "estado.required" => "Debes seleccionar un estado",
             "nombre.required" => "El nombre es obligatorio",
             "nombre.unique" => "El nombre ya existe",

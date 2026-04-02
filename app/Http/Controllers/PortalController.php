@@ -57,19 +57,35 @@ class PortalController extends Controller
         foreach ($request->productos as $producto) {
             $nuevo_pedido->pedido_detalles()->create([
                 "producto_id" => $producto["id"],
+                "precio" => $producto["precio"],
             ]);
         }
 
         // crear pdf con DOMPDF
-        $pdf = PDF::loadView('reportes.pedido', compact('nuevo_pedido'));
-        $pdf_path = public_path("pedidos/pedido_" . $nuevo_pedido->id . ".pdf");
-        $pdf->save($pdf_path);
-        $nuevo_pedido->pdf = "pedido_" . $nuevo_pedido->id . ".pdf";
-        $nuevo_pedido->save();
+        // $pdf = PDF::loadView('reportes.pedido', compact('nuevo_pedido'));
+        // $pdf_path = public_path("pedidos/pedido_" . $nuevo_pedido->id . ".pdf");
+        // $pdf->save($pdf_path);
+        // $nuevo_pedido->pdf = "pedido_" . $nuevo_pedido->id . ".pdf";
+        // $nuevo_pedido->save();
 
         $social = Social::first();
 
-        $whatsapp = "https://wa.me/" . $social->whatsapp . "?text=" . urlencode("Hola, me gustaría hacer un pedido. Mi pedido es el siguiente: " . asset("pedidos/pedido_" . $nuevo_pedido->id . ".pdf"));
+
+
+        $total = $nuevo_pedido->pedido_detalles->sum("precio");
+
+        $productos_txt  = "";
+        foreach ($nuevo_pedido->pedido_detalles as $item) {
+            $productos_txt .= "\nCódigo de Producto: " . $item->producto->codigo .
+                ", Producto: " . $item->producto->nombre .
+                ", Precio: " . number_format($item->precio, 2, ".", ",") . " Bs.";
+        }
+
+        $productos_txt .= "\n\nPedido Total: " . number_format($total, 2, ".", ",") . " Bs.";
+
+        $mensaje = "Hola, revisé tu catálogo digital, me interesan los siguientes productos:" . $productos_txt;
+
+        $whatsapp = "https://wa.me/" . $social->whatsapp . "?text=" . urlencode($mensaje);
 
         return response()->JSON([
             "message" => "Pedido creado exitosamente",

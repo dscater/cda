@@ -24,7 +24,10 @@ watch(
     (newValue) => {
         muestra_form.value = newValue;
         if (muestra_form.value) {
-            archivo.value.value = null;
+            cargarIconos();
+            if (archivo.value) {
+                archivo.value.value = null;
+            }
             document
                 .getElementsByTagName("body")[0]
                 .classList.add("modal-open");
@@ -154,6 +157,32 @@ const cerrarFormulario = () => {
     document.getElementsByTagName("body")[0].classList.remove("modal-open");
 };
 
+const listIconos = ref([]);
+const cargarIconos = () => {
+    axios.get(route("iconos.lista")).then((response) => {
+        listIconos.value = response.data;
+    });
+};
+
+const iconoSeleccionado = ref(null);
+const busqueda = ref("");
+
+// filtrar iconos (por nombre o clase)
+const iconosFiltrados = computed(() => {
+    if (!busqueda.value) return listIconos.value;
+
+    return listIconos.value.filter(
+        (i) =>
+            i.nombre.toLowerCase().includes(busqueda.value.toLowerCase()) ||
+            i.clase.toLowerCase().includes(busqueda.value.toLowerCase()),
+    );
+});
+
+const seleccionarIcono = (icono) => {
+    iconoSeleccionado.value = icono.clase;
+    form.imagen = icono.clase;
+};
+
 onMounted(() => {});
 </script>
 
@@ -202,7 +231,23 @@ onMounted(() => {});
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-5 mt-2">
+                    <div class="col-md-4 mt-2">
+                        <label class="required">Tipo de Imagen</label>
+                        <br />
+                        <el-switch
+                            size="large"
+                            active-text="CARGAR IMAGEN"
+                            inactive-text="USAR ICONO"
+                            v-model="form.tipo"
+                            :active-value="'imagen'"
+                            :inactive-value="'icono'"
+                            style="
+                                --el-switch-on-color: #257eb3;
+                                --el-switch-off-color: #555555;
+                            "
+                        />
+                    </div>
+                    <div class="col-md-5 mt-2" v-if="form.tipo == 'imagen'">
                         <label class="required">Imagen del Botón</label
                         ><small class="text-muted"
                             >(Tamaño recomendado: 530px x 90px)</small
@@ -216,6 +261,63 @@ onMounted(() => {});
                             ref="archivo"
                             @change="cargarArchivo($event, 'imagen')"
                         />
+                        <ul
+                            v-if="form.errors?.imagen"
+                            class="d-block text-danger list-unstyled"
+                        >
+                            <li class="parsley-required">
+                                {{ form.errors?.imagen }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-5 mt-2" v-if="form.tipo == 'icono'">
+                        <label class="required">Seleccionar Icono</label>
+
+                        <input
+                            type="text"
+                            class="form-control mb-2"
+                            v-model="busqueda"
+                            placeholder="Buscar icono..."
+                        />
+
+                        <!-- 🎯 Preview -->
+                        <div v-if="form.imagen" class="mb-2 text-center">
+                            <small class="text-muted">Seleccionado:</small>
+                            <div style="font-size: 30px">
+                                <i :class="form.imagen"></i>
+                            </div>
+                        </div>
+
+                        <!-- 🧩 Grid de iconos -->
+                        <div
+                            style="
+                                max-height: 220px;
+                                overflow-y: auto;
+                                border: 1px solid #ddd;
+                                border-radius: 6px;
+                                padding: 10px;
+                            "
+                        >
+                            <div
+                                class="d-flex flex-wrap gap-2"
+                                style="gap: 10px"
+                            >
+                                <div
+                                    style="cursor: pointer"
+                                    v-for="icono in iconosFiltrados"
+                                    :key="icono.clase"
+                                    @click="seleccionarIcono(icono)"
+                                    class="icon-item"
+                                    :class="{
+                                        'icon-selected':
+                                            form.imagen === icono.clase,
+                                    }"
+                                    title="icono.nombre"
+                                >
+                                    <i :class="icono.clase"></i>
+                                </div>
+                            </div>
+                        </div>
                         <ul
                             v-if="form.errors?.imagen"
                             class="d-block text-danger list-unstyled"
@@ -262,3 +364,13 @@ onMounted(() => {});
         </template>
     </MiModal>
 </template>
+
+<style scoped>
+.icon-item {
+    transition: all 0.3s;
+    font-size: 1.3em;
+}
+.icon-item:hover {
+    transform: translateY(-2px);
+}
+</style>

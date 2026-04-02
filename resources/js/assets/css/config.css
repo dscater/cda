@@ -305,7 +305,7 @@ body.fixedContentEstudiante.modal-open
 .menu_inicio {
     margin-top: 20px;
     width: 100%;
-    min-height: 79vh;
+    height: 79vh;
     display: flex;
     border-radius: 10px;
     overflow: hidden;
@@ -357,6 +357,20 @@ body.fixedContentEstudiante.modal-open
 .menu .opcion {
     width: 100%;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 10px;
+}
+
+.menu .opcion a {
+    width: 100%;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.menu .opcion a img {
+    width: 100%;
 }
 
 .menu_inicio .pagina_inicio i,
@@ -386,10 +400,6 @@ body.fixedContentEstudiante.modal-open
     right: -20px;
 }
 
-.menu .opcion img {
-    width: 96%;
-}
-
 #navbarNav {
     position: relative;
 }
@@ -400,12 +410,14 @@ body.fixedContentEstudiante.modal-open
 }
 .contenedor_busqueda_producto {
     width: 100%;
+    background-color: #fff;
     border: solid 1px var(--bgWhite2);
     position: absolute;
     top: 37px;
     right: 0px;
     max-height: 65vh;
     overflow: auto;
+    border-radius: 10px;
 }
 
 .contenedor_busqueda_producto .resultado_busqueda {
@@ -434,15 +446,41 @@ body.fixedContentEstudiante.modal-open
     width: 39px;
 }
 
+.boton_menu_icono {
+    flex: 1;
+    display: block;
+    width: 100%;
+    padding: 15px 5px;
+    background-color: var(--bg2t);
+    color: white;
+}
+
 @media (max-width: 867px) {
+    .menu_inicio {
+        height: 50vh;
+    }
+
     .contenedor_busqueda_producto {
         position: relative;
         top: 0px;
         right: 0px;
     }
 
+    .boton_menu_icono {
+        padding: 5px;
+        font-size: 0.3em;
+    }
+
     .portada {
-        display: none;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .portada img {
+        width: auto;
+        max-height: 100%;
+        object-fit: fill;
     }
 
     .menu {

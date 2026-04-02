@@ -213,6 +213,25 @@ onMounted(() => {});
                         </ul>
                     </div>
                     <div class="col-md-4 mt-2">
+                        <label class="required">Código de Producto</label>
+                        <el-input
+                            type="text"
+                            :class="{
+                                'parsley-error': form.errors?.codigo,
+                            }"
+                            v-model="form.codigo"
+                            autosize
+                        ></el-input>
+                        <ul
+                            v-if="form.errors?.codigo"
+                            class="d-block text-danger list-unstyled"
+                        >
+                            <li class="parsley-required">
+                                {{ form.errors?.codigo }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 mt-2">
                         <label class="required">Nombre de Producto</label>
                         <el-input
                             type="text"
@@ -228,6 +247,26 @@ onMounted(() => {});
                         >
                             <li class="parsley-required">
                                 {{ form.errors?.nombre }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <label class="required">Precio</label>
+                        <el-input
+                            type="number"
+                            step="0.01"
+                            :class="{
+                                'parsley-error': form.errors?.precio,
+                            }"
+                            v-model="form.precio"
+                            autosize
+                        ></el-input>
+                        <ul
+                            v-if="form.errors?.precio"
+                            class="d-block text-danger list-unstyled"
+                        >
+                            <li class="parsley-required">
+                                {{ form.errors?.precio }}
                             </li>
                         </ul>
                     </div>

@@ -3,9 +3,12 @@ import { defineStore } from "pinia";
 export const useConfiguracionStore = defineStore("configuracion", {
     state: () => ({
         oConfiguracion: {
-            sistema: "SVT",
-            alias: "SVT",
+            sistema: "CDA",
+            alias: "CDA",
+            logo: "",
             url_logo: "",
+            portada: "",
+            url_portada: "",
         },
     }),
     actions: {

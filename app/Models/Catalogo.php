@@ -12,6 +12,7 @@ class Catalogo extends Model
 
     protected $fillable = [
         "nombre",
+        "tipo",
         "imagen",
         "descargar"
     ];

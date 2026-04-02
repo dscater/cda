@@ -82,12 +82,19 @@ class CatalogoService
     {
         $catalogo = Catalogo::create([
             "nombre" => mb_strtoupper($datos["nombre"]),
+            "tipo" => $datos["tipo"],
             "descargar" => $datos["descargar"]
         ]);
 
-        // cargar imagen
-        if ($datos["imagen"] && !is_string($datos["imagen"])) {
-            $this->cargarFoto($catalogo, $datos["imagen"]);
+        if ($datos["tipo"] == 'icono') {
+            $catalogo->imagen = $datos["imagen"];
+            $catalogo->save();
+        } else {
+
+            // cargar imagen
+            if ($datos["imagen"] && !is_string($datos["imagen"])) {
+                $this->cargarFoto($catalogo, $datos["imagen"]);
+            }
         }
 
         // registrar accion
@@ -110,12 +117,18 @@ class CatalogoService
 
         $catalogo->update([
             "nombre" => mb_strtoupper($datos["nombre"]),
+            "tipo" => $datos["tipo"],
             "descargar" => $datos["descargar"]
         ]);
 
-        // cargar imagen
-        if ($datos["imagen"] && !is_string($datos["imagen"])) {
-            $this->cargarFoto($catalogo, $datos["imagen"]);
+        if ($datos["tipo"] == 'icono') {
+            $catalogo->imagen = $datos["imagen"];
+            $catalogo->save();
+        } else {
+            // cargar imagen
+            if ($datos["imagen"] && !is_string($datos["imagen"])) {
+                $this->cargarFoto($catalogo, $datos["imagen"]);
+            }
         }
 
         // registrar accion
