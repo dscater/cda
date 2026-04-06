@@ -25,7 +25,7 @@ class UserStoreRequest extends FormRequest
             "nombre" => "required|min:2",
             "paterno" => "required|min:2",
             "materno" => "nullable",
-            "correo" => "required|email|unique:users,correo",
+            "correo" => "nullable|email|unique:users,correo",
             "fono" => "required|min:2",
             "acceso" => "required",
             "password" => "required|min:6",
