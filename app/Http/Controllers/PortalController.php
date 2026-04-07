@@ -38,6 +38,15 @@ class PortalController extends Controller
         $productos = Producto::where("catalogo_id", $catalogo->id)
             ->where("estado", "PÚBLICO")->get()->each->append('imagen_b64');;
         $pdf = PDF::loadView('reportes.catalogo', compact('catalogo', 'productos'));
+
+        // ENUMERAR LAS PÁGINAS USANDO CANVAS
+        $pdf->output();
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf->get_canvas();
+        $alto = $canvas->get_height();
+        $ancho = $canvas->get_width();
+        $canvas->page_text(round($ancho / 2, 0), 10, "{PAGE_NUM}/{PAGE_COUNT}", null, 11, array(0, 0, 0));
+
         return $pdf->stream($catalogo->nombre . '.pdf');
     }
 

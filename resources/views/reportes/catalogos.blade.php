@@ -54,7 +54,7 @@
             width: 450px;
             margin: auto;
             margin-top: 0PX;
-            margin-bottom: 15px;
+            margin-bottom: 0px;
             text-align: center;
             font-size: 14pt;
         }
@@ -63,7 +63,6 @@
             width: 250px;
             text-align: center;
             margin: auto;
-            margin-top: 15px;
             font-weight: bold;
             font-size: 1.1em;
         }
@@ -72,7 +71,6 @@
             width: 250px;
             text-align: center;
             margin: auto;
-            margin-top: 15px;
             font-weight: normal;
             font-size: 0.85em;
         }

@@ -280,7 +280,7 @@ onMounted(() => {});
                             placeholder="Buscar icono..."
                         />
 
-                        <!-- 🎯 Preview -->
+                        <!-- Preview -->
                         <div v-if="form.imagen" class="mb-2 text-center">
                             <small class="text-muted">Seleccionado:</small>
                             <div style="font-size: 30px">
@@ -288,7 +288,7 @@ onMounted(() => {});
                             </div>
                         </div>
 
-                        <!-- 🧩 Grid de iconos -->
+                        <!-- Grid de iconos -->
                         <div
                             style="
                                 max-height: 220px;

@@ -318,7 +318,8 @@ body.fixedContentEstudiante.modal-open
 }
 .portada img {
     width: 100%;
-    max-height: 100%;
+    height: 100%;
+    width: 100%;
     object-fit: fill;
 }
 
@@ -460,6 +461,13 @@ body.fixedContentEstudiante.modal-open
         height: 50vh;
     }
 
+    .portada {
+        width: 53%;
+    }
+    .menu {
+        width: 47%;
+    }
+
     .contenedor_busqueda_producto {
         position: relative;
         top: 0px;
@@ -471,6 +479,10 @@ body.fixedContentEstudiante.modal-open
         font-size: 0.3em;
     }
 
+    .boton_menu_icono span {
+        font-size: 2em !important;
+    }
+
     .portada {
         display: flex;
         justify-content: center;
@@ -479,12 +491,22 @@ body.fixedContentEstudiante.modal-open
 
     .portada img {
         width: auto;
-        max-height: 100%;
+        width: 100%;
+        height: 100%;
         object-fit: fill;
     }
 
     .menu {
         flex: 1;
+    }
+
+    .menu .opcion a {
+        display: flex;
+        height: 40px;
+    }
+
+    .menu img {
+        object-fit: fill;
     }
 
     .contenedor_producto {

@@ -36,7 +36,14 @@ const props = defineProps({
                                     alt="Boton"
                                     v-if="item.tipo == 'imagen'"
                                 />
-                                <div v-else class="boton_menu_icono">
+                                <div
+                                    v-else
+                                    class="boton_menu_icono d-flex align-items-center justify-content-center"
+                                >
+                                    <span
+                                        class="font-weight-bold text-lg mr-2"
+                                        >{{ item.nombre }}</span
+                                    >
                                     <i class="fa-2x" :class="item.imagen"></i>
                                 </div>
                             </Link>

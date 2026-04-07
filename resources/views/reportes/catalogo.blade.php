@@ -34,6 +34,7 @@
     @endphp
     @foreach ($productos as $item)
         {{-- <img class="img_catalogo" src="{{ $item->imagen_b64 }}" alt=""> --}}
+        {{ $item->codigo }}
         <img class="img_catalogo" src="{{ public_path('imgs/productos/' . $item->imagen) }}" alt="">
         @php
             $cont++;
