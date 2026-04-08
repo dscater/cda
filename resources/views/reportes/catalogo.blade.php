@@ -10,20 +10,31 @@
         }
 
         @page {
-            margin-top: 1.5cm;
-            margin-bottom: 0.3cm;
-            margin-left: 0.3cm;
-            margin-right: 0.3cm;
+            margin-top: 0.5cm;
+            margin-bottom: 0.8cm;
+            margin-left: 0.5cm;
+            margin-right: 0.5cm;
+            text-align: center;
         }
 
         .img_catalogo {
-            max-height: 100%;
-            width: 100%;
-            height: auto;
+            max-height: 95%;
+            width: 95%;
         }
 
         .siguiente {
             page-break-after: always;
+        }
+
+        .titulo {
+            width: 100%;
+            text-align: center;
+            margin-top: -10px;
+        }
+
+        .codigo {
+            text-align: left;
+            padding-left: 17px;
         }
     </style>
 </head>
@@ -34,12 +45,13 @@
     @endphp
     @foreach ($productos as $item)
         {{-- <img class="img_catalogo" src="{{ $item->imagen_b64 }}" alt=""> --}}
-        {{ $item->codigo }}
+        <div class="titulo">{{ $catalogo->nombre }}</div>
+        <div class="codigo">{{ $item->codigo }}</div>
         <img class="img_catalogo" src="{{ public_path('imgs/productos/' . $item->imagen) }}" alt="">
         @php
             $cont++;
         @endphp
-        @if ($cont < count($productos) - 1)
+        @if ($cont < count($productos))
             <div class="siguiente"></div>
         @endif
     @endforeach

@@ -35,6 +35,10 @@ class PortalController extends Controller
 
     public function descargar_catalogo(Catalogo $catalogo)
     {
+        if ($catalogo->descargar == 0) {
+            return redirect()->route('portal');
+        }
+
         $productos = Producto::where("catalogo_id", $catalogo->id)
             ->where("estado", "PÚBLICO")->get()->each->append('imagen_b64');;
         $pdf = PDF::loadView('reportes.catalogo', compact('catalogo', 'productos'));
@@ -45,7 +49,7 @@ class PortalController extends Controller
         $canvas = $dom_pdf->get_canvas();
         $alto = $canvas->get_height();
         $ancho = $canvas->get_width();
-        $canvas->page_text(round($ancho / 2, 0), 10, "{PAGE_NUM}/{PAGE_COUNT}", null, 11, array(0, 0, 0));
+        $canvas->page_text(round($ancho / 2, 0), 22, "{PAGE_NUM}/{PAGE_COUNT}", null, 11, array(0, 0, 0));
 
         return $pdf->stream($catalogo->nombre . '.pdf');
     }
